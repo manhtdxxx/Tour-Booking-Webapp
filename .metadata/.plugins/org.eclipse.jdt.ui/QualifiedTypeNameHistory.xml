@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="ClassName"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.lang.LayerInstantiationException"/>
+    <fullyQualifiedTypeName name="database.JDBCUtil"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="model.KhachHang"/>
+    <fullyQualifiedTypeName name="database.KhachHangDAO"/>
+    <fullyQualifiedTypeName name="model.LoaiTour"/>
+    <fullyQualifiedTypeName name="database.LoaiTourDAO"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="database.DatTourDAO"/>
+    <fullyQualifiedTypeName name="model.ChiTietDatTour"/>
+    <fullyQualifiedTypeName name="database.DAO_Interface"/>
+    <fullyQualifiedTypeName name="model.Tour"/>
+    <fullyQualifiedTypeName name="database.TourDAO"/>
+    <fullyQualifiedTypeName name="model.DatTour"/>
+    <fullyQualifiedTypeName name="model.DoiTac"/>
+    <fullyQualifiedTypeName name="database.DoiTacDAO"/>
+    <fullyQualifiedTypeName name="model.VaiTroDoiTac"/>
+    <fullyQualifiedTypeName name="ThucHanh3.Service"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

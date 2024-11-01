@@ -1,0 +1,26 @@
+package model;
+
+public class KhachHang {    @Column(name = "maKH", length = 5, nullable = false)
+    private String maKH;
+
+    @Column(name = "tenKH", length = 255)
+    private String tenKH;
+
+    @Column(name = "username", length = 50, nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "password", length = 50, nullable = false)
+    private String password;
+
+    @Column(name = "gioiTinh", length = 50)
+    private String gioiTinh;
+
+    @Column(name = "ngaySinh")
+    private java.sql.Date ngaySinh;
+
+    @Column(name = "soDienThoai", length = 50)
+    private String soDienThoai;
+
+    @Column(name = "email", length = 50)
+    private String email;
+}

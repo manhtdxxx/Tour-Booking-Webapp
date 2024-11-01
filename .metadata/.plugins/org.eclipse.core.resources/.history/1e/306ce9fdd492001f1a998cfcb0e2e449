@@ -1,0 +1,16 @@
+package model;
+
+import java.sql.Date;
+
+public class KhachHang {
+    private String maKH;
+    private String tenKH;
+    private String username;
+    private String password;
+    private String gioiTinh;
+    private Date ngaySinh;
+    private String soDienThoai;
+    private String email;
+    
+    
+}

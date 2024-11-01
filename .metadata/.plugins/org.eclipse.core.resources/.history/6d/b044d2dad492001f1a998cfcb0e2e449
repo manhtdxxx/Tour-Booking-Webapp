@@ -1,0 +1,20 @@
+package model;
+
+java.sql.Date
+
+public class KhachHang {
+    private String maKH;
+    private String tenKH;
+    private String username;
+    private String password;
+    private String gioiTinh;
+
+    @Column(name = "ngaySinh")
+    private java.sql.Date ngaySinh;
+
+    @Column(name = "soDienThoai", length = 50)
+    private String soDienThoai;
+
+    @Column(name = "email", length = 50)
+    private String email;
+}
