@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.banner, .banner>div {
+	display: flex;
+	flex-direction: column; /* Main axis is vertical */
+	justify-content: center; /* Center items along the main axis */
+	align-items: center; /* Center items along the cross axis*/
+}
+
+.banner img {
+	width: 80%;
+	height: 500px;
+	object-fit: cover;
+}
+
+.banner {
+	position: relative;
+}
+
+.banner>div {
+	position: absolute;
+	top: calc(50%)
+}

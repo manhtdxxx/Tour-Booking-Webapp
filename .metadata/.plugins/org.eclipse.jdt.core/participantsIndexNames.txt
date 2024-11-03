@@ -1,9 +1,3 @@
 INDEX VERSION 1.134
-C:\Users\manh\Documents\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2033659322.index
-\web_session\src\main\java
-C:\Users\manh\Documents\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4039686040.index
-\session\src\main\java
-C:\Users\manh\Documents\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3091622634.index
-\travel_agency\src\main\java
-C:\Users\manh\Documents\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3409856661.index
-\ch05_ex1_email_sol\src\java
+C:\Users\Manh\Documents\BookingTourWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\521918662.index
+\bookingTour\src\main\java
