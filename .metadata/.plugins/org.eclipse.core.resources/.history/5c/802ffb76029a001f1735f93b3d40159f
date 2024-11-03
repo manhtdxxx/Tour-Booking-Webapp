@@ -9,7 +9,7 @@
 
 .banner img {
 	width: 80%;
-	height: 500px;
+	height: auto;
 	object-fit: cover;
 }
 
@@ -23,7 +23,10 @@
 	padding: 20px 40px;
 	color: #FFFFFF;
 	border-radius: 20px;
+	font-weight: bolder;
 }
+
+.banner>div a
 
 .box-hot-tour img {
 	width: 100%;
@@ -39,9 +42,25 @@
 
 .box-category {
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 }
 
 .box-category a {
 	position: absolute;
-	align-items: flex-end;
+	color: black;
+	padding: 10px;
+	font-weight: bold;
+	z-index: 1; /* Ensures it appears above the image */
+}
+
+/* Hover effect for images in the .box-hot-tour and .box-category */
+.box-hot-tour img, .box-category img {
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.box-hot-tour img:hover, .box-category img:hover {
+	transform: scale(1.05); /* Slightly enlarge the image */
+	opacity: 0.95; /* Dim the image slightly */
 }
