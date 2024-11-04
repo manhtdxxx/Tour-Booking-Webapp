@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+.navbar-brand {
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.navbar-text {
+	margin-right: 80px
+}
+
+.nav-item {
+	margin-right: 40px
+}
+
 .banner, .banner>div {
 	display: flex;
 	flex-direction: column; /* Main axis is vertical */

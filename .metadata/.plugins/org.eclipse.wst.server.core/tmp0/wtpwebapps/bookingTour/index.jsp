@@ -12,17 +12,31 @@
 </head>
 
 <body>
-	<header>
-		<div class="container-fluid bg-light mt-1">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2 p-3 bg-danger">Logo</div>
-					<div class="col-md-6 p-3 bg-warning">Menu</div>
-					<div class="col-md-4 p-3 bg-info">Search</div>
-				</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> <img src="images/banner1.jpg" alt="Logo"
+				style="width: 60px;" class="rounded-pill">
+			</a> <span class="navbar-text">Logo</span>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown">Danh Mục Sản Phẩm</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Link</a></li>
+							<li><a class="dropdown-item" href="#">Another link</a></li>
+							<li><a class="dropdown-item" href="#">A third link</a></li>
+						</ul></li>
+				</ul>
 			</div>
 		</div>
-	</header>
+	</nav>
 
 	<section>
 		<div class="container banner mt-1">
@@ -138,35 +152,27 @@
 			<h1>Danh Mục Sản Phẩm</h1>
 			<div class="row">
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 			</div>
 			<div class="row mt-3">
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 				<div class="col-md-4 box-category">
-					<a href="#">Tour Team Building</a> 
-					<img alt="" src="images/banner1.jpg">
+					<a href="#">Tour Team Building</a> <img alt="" src="images/banner1.jpg">
 				</div>
 			</div>
 		</div>
 	</section>
-	<section></section>
-	<footer></footer>
 </body>
 </html>
