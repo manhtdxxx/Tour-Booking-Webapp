@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>Trang chủ</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -12,28 +12,40 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img src="images/banner1.jpg" alt="Logo"
-				style="width: 60px;" class="rounded-pill">
-			</a> <span class="navbar-text">Logo</span>
+		
+			<!-- LOGO -->
+			<div class="d-flex align-items-center justify-content-start ms-2">
+				<a class="navbar-brand ms-2" href="#"> <img src="images/banner1.jpg" alt="Logo"
+					style="width: 80px;" class="rounded-circle">
+				</a> <span class="navbar-text">LOGO</span>
+			</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			
+			<!-- NAV LINK -->
+			<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"
+					<li class="nav-item me-2"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item dropdown me-2"><a class="nav-link dropdown-toggle" href="#" role="button"
 						data-bs-toggle="dropdown">Danh Mục Sản Phẩm</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Link</a></li>
 							<li><a class="dropdown-item" href="#">Another link</a></li>
 							<li><a class="dropdown-item" href="#">A third link</a></li>
 						</ul></li>
+					<li class="nav-item me-2"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 				</ul>
+			</div>
+			
+			<!-- LOGIN/REGISTER -->
+			<div class="d-flex justify-content-end me-2">
+				<a href="#" class="btn btn-outline-light me-2">Login</a> 
+				<a href="register.jsp" class="btn btn-primary">Register</a>
 			</div>
 		</div>
 	</nav>
