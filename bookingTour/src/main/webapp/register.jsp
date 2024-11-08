@@ -39,6 +39,19 @@
 				<div class="container mb-3 text-center">
 					<h1>Đăng ký tài khoản</h1>
 				</div>
+
+				<!-- Error Message -->
+				<%
+				if (!error.isEmpty()) {
+				%>
+				<div class="alert alert-danger alert-dismissible fade show">
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+					<strong><%=error%></strong>
+				</div>
+				<%
+				}
+				%>
+
 				<form action="do-register" method="post">
 					<div class=" mt-3 mb-3">
 						<label for="text" class="form-label">Username<span class="red">*</span>

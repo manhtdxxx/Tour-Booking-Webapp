@@ -62,6 +62,7 @@ public class Register extends HttpServlet {
 			KhachHang kh = new KhachHang();
 			kh.setUsername(username);
 			kh.setPassword(password);
+			kh.setEmail(email);
 			kh.setMaKH(kh_dao.generateNewMaKH());
 			kh_dao.insert(kh);
 			//

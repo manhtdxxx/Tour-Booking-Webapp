@@ -232,4 +232,33 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 		latestMaKH = String.format("KH%03d", num);
 		return latestMaKH;
 	}
+
+	public KhachHang selectByUsernameAndPassword(KhachHang kh) {
+		KhachHang result = null;
+		String sql = "SELECT * FROM khachhang WHERE username=? and password=?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, kh.getUsername());
+			st.setString(2, kh.getPassword());
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					String maKH = rs.getString("maKH");
+					String tenKH = rs.getString("tenKH");
+					String username = rs.getString("username");
+					String password = rs.getString("password");
+					String gioiTinh = rs.getString("gioiTinh");
+					Date ngaySinh = rs.getDate("ngaySinh");
+					String soDienThoai = rs.getString("soDienThoai");
+					String email = rs.getString("email");
+
+					result = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai, email);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
 }
