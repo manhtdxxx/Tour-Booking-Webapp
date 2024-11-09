@@ -86,7 +86,7 @@
 
     <div class="container">
         <h1 class="text-center mb-4">Đăng nhập</h1>
-        <form action="do-login">
+        <form action="do-login" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
