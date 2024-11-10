@@ -140,7 +140,7 @@ h1:hover {
 					onchange="showSubmitButton()"> <label class="form-check-label">I agree to the <a
 					href="#">terms of service</a></label>
 			</div>
-			<button type="submit" class="btn btn-primary" id="submit" style="visibility: hidden;">Register</button>
+			<button type="submit" class="btn btn-primary" id="submit" style="visibility: hidden;">Đăng ký</button>
 		</form>
 	</div>
 

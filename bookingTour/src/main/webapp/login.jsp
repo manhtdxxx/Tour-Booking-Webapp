@@ -97,9 +97,26 @@ p {
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100">
+	<%
+	String error = (String) request.getAttribute("error");
+	error = (error != null) ? error : "";
+	%>
 
 	<div class="container">
 		<h1 class="text-center mb-4">Đăng nhập</h1>
+
+		<!-- Error Message -->
+		<%
+		if (!error.isEmpty()) {
+		%>
+		<div class="alert alert-danger alert-dismissible fade show">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<strong><%=error%></strong>
+		</div>
+		<%
+		}
+		%>
+
 		<form action="do-login" method="post">
 			<div class="mb-3">
 				<label for="username" class="form-label">Username:</label> <input type="text"

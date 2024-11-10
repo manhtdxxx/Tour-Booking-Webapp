@@ -1,3 +1,4 @@
+<%@page import="model.KhachHang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,47 +10,73 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<div class="container-fluid">
-		
+
 			<!-- LOGO -->
-			<div class="d-flex align-items-center justify-content-start ms-2">
-				<a class="navbar-brand ms-2" href="#"> <img src="images/banner1.jpg" alt="Logo"
-					style="width: 80px;" class="rounded-circle">
-				</a> <span class="navbar-text">LOGO</span>
-			</div>
+			<a class="navbar-brand me-auto" href="#"> <img src="images/banner1.jpg" alt="Logo"
+				class="rounded-circle me-1" style="width: 50px;"> <span
+				class="navbar-text text-light fw-bold">LOGO</span>
+			</a>
+
+			<!-- TOGGLER BUTTON FOR MOBILE VIEW -->
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-				data-bs-target="#collapsibleNavbar">
+				data-bs-target="#navbarNav">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
-			<!-- NAV LINK -->
-			<div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+
+			<!-- NAV LINKS SECTION -->
+			<div class="collapse navbar-collapse justify-content-center me-auto" id="navbarNav">
+				<!-- NAV LINKS -->
 				<ul class="navbar-nav">
-					<li class="nav-item me-2"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item dropdown me-2"><a class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown">Danh Mục Sản Phẩm</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Link</a></li>
-							<li><a class="dropdown-item" href="#">Another link</a></li>
-							<li><a class="dropdown-item" href="#">A third link</a></li>
+					<li class="nav-item me-3"><a class="nav-link text-light" href="index.jsp">Home</a></li>
+					<li class="nav-item dropdown me-3"><a class="nav-link dropdown-toggle text-light" href="#"
+						role="button" data-bs-toggle="dropdown"> Danh Mục Sản Phẩm </a>
+						<ul class="dropdown-menu shadow">
+							<li><a class="dropdown-item" href="#">Link 1</a></li>
+							<li><a class="dropdown-item" href="#">Another Link</a></li>
+							<li><a class="dropdown-item" href="#">Third Link</a></li>
 						</ul></li>
-					<li class="nav-item me-2"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item me-3"><a class="nav-link text-light" href="#">About</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="#">Contact</a></li>
 				</ul>
 			</div>
-			
-			<!-- LOGIN/REGISTER -->
-			<div class="d-flex justify-content-end me-2">
-				<a href="#" class="btn btn-outline-light me-2">Login</a> 
-				<a href="register.jsp" class="btn btn-primary">Register</a>
+
+			<!-- LOGIN/REGISTER OR PROFILE SECTION -->
+			<div class="d-flex ms-auto">
+				<%
+				Object obj = session.getAttribute("khachHang");
+				KhachHang khachHang = (obj != null) ? (KhachHang) obj : null;
+
+				if (khachHang == null) {
+				%>
+				<a href="login.jsp" class="btn btn-outline-light me-2">Login</a> <a href="register.jsp"
+					class="btn btn-primary">Register</a>
+				<%
+				} else {
+				%>
+				<div class="dropdown">
+					<button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+						<%=khachHang.getUsername()%>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end shadow">
+						<li><a class="dropdown-item" href="profile.jsp">Profile</a></li>
+						<li><a class="dropdown-item" href="#">Settings</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="do-logout">Logout</a></li>
+					</ul>
+				</div>
+				<%
+				}
+				%>
 			</div>
 		</div>
 	</nav>
+
 
 	<section>
 		<div class="container banner mt-1">
