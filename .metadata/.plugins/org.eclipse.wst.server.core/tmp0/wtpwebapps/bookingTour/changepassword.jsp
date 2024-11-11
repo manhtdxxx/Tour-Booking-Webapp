@@ -86,10 +86,10 @@ h2 {
 	if (khachHang == null) {
 	%>
 	<div class="alert alert-danger text-center py-5 px-5 shadow rounded-pill" role="alert">
-		<h6 class="display-6 fw-normal">Bạn chưa đăng nhập vào hệ thống!</h6>
+		<h6 class="display-6 fw-normal">Bạn cần đăng nhập để truy cập trang này!</h6>
 		<p class="lead mt-3">
 			Vui lòng quay lại <a href="index.jsp" class="fw-bolder text-primary text-decoration-underline">trang
-				chủ</a>!
+				chủ</a>.
 		</p>
 	</div>
 
