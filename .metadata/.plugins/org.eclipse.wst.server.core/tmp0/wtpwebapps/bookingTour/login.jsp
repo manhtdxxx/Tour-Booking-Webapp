@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Trang đăng nhập</title>
+<title>Đăng nhập</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -97,12 +97,13 @@ p {
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100">
+
 	<%
 	String error = (String) request.getAttribute("error");
 	error = (error != null) ? error : "";
 	%>
 
-	<div class="container">
+	<div class="container position-relative">
 		<h1 class="text-center mb-4">Đăng nhập</h1>
 
 		<!-- Error Message -->
@@ -136,7 +137,7 @@ p {
 
 			<button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
 
-			<p>
+			<p class="mt-3 text-center">
 				Chưa có tài khoản? <a href="register.jsp">Đăng ký</a>
 			</p>
 		</form>

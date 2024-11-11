@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Trang đăng ký</title>
+<title>Đăng ký</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -86,6 +86,7 @@ h1:hover {
 </head>
 
 <body>
+
 	<%
 	String error = (String) request.getAttribute("error");
 	error = (error != null) ? error : "";
@@ -94,6 +95,7 @@ h1:hover {
 	String password = (String) request.getAttribute("password");
 	String password2 = (String) request.getAttribute("password2");
 	%>
+	
 	<div class="container">
 		<div class="text-center mb-4">
 			<h1>Đăng ký tài khoản</h1>
