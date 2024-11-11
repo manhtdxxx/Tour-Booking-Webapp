@@ -1,3 +1,4 @@
+<%@page import="model.KhachHang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
@@ -75,20 +76,54 @@ h2 {
 <body class="d-flex align-items-center justify-content-center vh-100">
 
 	<%
+	Object obj = session.getAttribute("khachHang");
+	KhachHang khachHang = null;
+
+	if (obj != null) {
+		khachHang = (KhachHang) obj;
+	}
+
+	if (khachHang == null) {
+	%>
+	<div class="alert alert-danger text-center py-5 px-5 shadow rounded-pill" role="alert">
+		<h6 class="display-6 fw-normal">Bạn chưa đăng nhập vào hệ thống!</h6>
+		<p class="lead mt-3">
+			Vui lòng quay lại <a href="index.jsp" class="fw-bolder text-primary text-decoration-underline">trang
+				chủ</a>!
+		</p>
+	</div>
+
+
+	<%
+	} else {
 	String error = (String) request.getAttribute("error");
+	String success = (String) request.getAttribute("success");
+
 	error = (error != null) ? error : "";
+	success = (success != null) ? success : "";
 	%>
 
 	<div class="form-container">
 		<h1 class="text-center mb-4">Đổi Mật Khẩu</h1>
 
-		<!-- Error Message -->
+		<!-- Error/Success Message -->
 		<%
 		if (!error.isEmpty()) {
 		%>
-		<div class="alert alert-danger alert-dismissible fade show">
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
 			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-			<strong><%=error%></strong>
+			<strong>Lỗi: </strong>
+			<%=error%>
+		</div>
+		<%
+		}
+	
+		if (!success.isEmpty()) {
+		%>
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<strong>Thành công: </strong>
+			<%=success%>
 		</div>
 		<%
 		}
@@ -113,7 +148,9 @@ h2 {
 			<button type="submit" class="btn btn-primary w-100">Đổi Mật Khẩu</button>
 		</form>
 	</div>
-
+	<%
+	}
+	%>
 
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", confirmPassword); // Run on page load

@@ -98,16 +98,14 @@ p {
 
 <body class="d-flex align-items-center justify-content-center vh-100">
 
-	<%
-	String error = (String) request.getAttribute("error");
-	error = (error != null) ? error : "";
-	%>
-
 	<div class="container position-relative">
 		<h1 class="text-center mb-4">Đăng nhập</h1>
 
-		<!-- Error Message -->
+		<!-- Error message when login-->
 		<%
+		String error = (String) request.getAttribute("error");
+		error = (error != null) ? error : "";
+
 		if (!error.isEmpty()) {
 		%>
 		<div class="alert alert-danger alert-dismissible fade show">
@@ -115,6 +113,22 @@ p {
 			<strong><%=error%></strong>
 		</div>
 		<%
+		}
+		%>
+
+		<!-- Message when you change password successfully -->
+		<%
+		String success = (String) session.getAttribute("success");
+		success = (success != null) ? success : "";
+
+		if (!success.isEmpty()) {
+		%>
+		<div class="alert alert-success alert-dismissible fade show">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<strong><%=success%></strong>
+		</div>
+		<%
+		session.removeAttribute("success");
 		}
 		%>
 
