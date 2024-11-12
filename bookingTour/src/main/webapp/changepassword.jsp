@@ -126,6 +126,7 @@ h2 {
 			<%=success%>
 		</div>
 		<%
+		request.removeAttribute("success");
 		}
 		%>
 

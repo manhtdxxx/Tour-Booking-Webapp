@@ -132,19 +132,40 @@ p {
 		}
 		%>
 
+		<!-- Cookies -->
+		<%
+		String savedUsername = "";
+		String savedPassword = "";
+
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("username".equals(cookie.getName())) {
+			savedUsername = cookie.getValue();
+				}
+				if ("password".equals(cookie.getName())) {
+			savedPassword = cookie.getValue();
+				}
+			}
+		}
+		%>
+
 		<form action="do-login" method="post">
 			<div class="mb-3">
 				<label for="username" class="form-label">Username:</label> <input type="text"
-					class="form-control" id="username" placeholder="Enter username" name="username" required>
+					class="form-control" id="username" placeholder="Enter username" name="username"
+					value="<%=savedUsername%>" required>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password:</label> <input type="password"
-					class="form-control" id="password" placeholder="Enter password" name="password" required>
+					class="form-control" id="password" placeholder="Enter password" name="password"
+					value="<%=savedPassword%>" required>
 			</div>
 			<div class="d-flex align-items-center justify-content-between mb-3">
 				<div class="form-check">
-					<input class="form-check-input" type="checkbox" name="remember" id="remember"> <label
-						class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+					<input class="form-check-input" type="checkbox" name="remember" id="remember"
+						<%=(!savedUsername.isEmpty() ? "checked" : "")%>> <label class="form-check-label"
+						for="remember">Ghi nhớ đăng nhập</label>
 				</div>
 				<a href="#">Quên mật khẩu?</a>
 			</div>
