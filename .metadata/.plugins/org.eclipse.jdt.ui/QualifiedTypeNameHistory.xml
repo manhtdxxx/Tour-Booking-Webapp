@@ -28,7 +28,11 @@
     <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="database.DAOInterface"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
+    <fullyQualifiedTypeName name="database.NhanVienDAO"/>
+    <fullyQualifiedTypeName name="model.DonDatHang"/>
     <fullyQualifiedTypeName name="model.KhachHang"/>
     <fullyQualifiedTypeName name="database.KhachHangDAO"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>

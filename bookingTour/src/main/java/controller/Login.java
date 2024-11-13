@@ -46,6 +46,10 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String rememberMe = request.getParameter("remember");
@@ -83,7 +87,7 @@ public class Login extends HttpServlet {
 				response.addCookie(passwordCookie);
 			}
 		} else {
-			request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng!");
+			request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng! Vui lòng nhập lại.");
 			url = "/login.jsp";
 		}
 

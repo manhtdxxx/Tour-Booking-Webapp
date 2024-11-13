@@ -85,13 +85,19 @@ h2 {
 
 	if (khachHang == null) {
 	%>
-	<div class="alert alert-danger text-center py-5 px-5 shadow rounded-pill" role="alert">
-		<h6 class="display-6 fw-normal">Bạn cần đăng nhập để truy cập trang này!</h6>
-		<p class="lead mt-3">
+	<div class="alert alert-danger text-center py-4 px-5 shadow-lg rounded-pill" role="alert"
+		aria-live="assertive">
+		<h1 class="display-5 fw-normal">Bạn cần đăng nhập <br> để truy cập trang này!</h1>
+		<div class="mt-4">
 			Vui lòng quay lại <a href="index.jsp" class="fw-bolder text-primary text-decoration-underline">trang
 				chủ</a>.
-		</p>
+		</div>
+		<div class="mt-1">
+			Hoặc truy cập <a href="login.jsp" class="fw-bold text-primary text-decoration-underline">trang
+				đăng nhập</a> để tiếp tục.
+		</div>
 	</div>
+
 
 
 	<%
@@ -117,7 +123,7 @@ h2 {
 		</div>
 		<%
 		}
-	
+
 		if (!success.isEmpty()) {
 		%>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
