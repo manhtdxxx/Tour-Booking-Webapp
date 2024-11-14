@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.KhachHangDAO;
 import model.KhachHang;
 
 /**
@@ -26,37 +29,48 @@ public class UpdateProfile extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		String maKH = request.getParameter("maKH");
 		String name = request.getParameter("customerName");
 		String gender = request.getParameter("gender");
-		String dob = request.getParameter("dob");
+		String dobStr = request.getParameter("dob");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-		
-		request.setAttribute("name", name);
-		request.setAttribute("gender", gender);
-		request.setAttribute("dob", dob);
-		request.setAttribute("phone", phone);
-		request.setAttribute("email", email);
-		
-		String url = "";
-		String error = "";
-		
+
+		Date dob = dobStr != null && !dobStr.isEmpty() ? Date.valueOf(dobStr) : null;
+
 		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("khachHang");
-		KhachHang khachHang = null;
+		KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
 
-		if (obj != null) {
-			khachHang = (KhachHang) obj;
-		}
+		if (khachHang != null && khachHang.getMaKH().equals(maKH)) {
+			khachHang.setTenKH(name);
+			khachHang.setGioiTinh(gender);
+			khachHang.setNgaySinh(dob);
+			khachHang.setSoDienThoai(phone);
+			khachHang.setEmail(email);
 
-		if (khachHang == null) {
-			error = "Bạn chưa đăng nhập vào hệ thống!";
-			url = "/changepassword.jsp";
+			boolean isUpdated = new KhachHangDAO().updateInfo(khachHang);
+			if (isUpdated) {
+				// Update successful - store the updated object in the session
+				session.setAttribute("khachHang", khachHang);
+				request.setAttribute("success", "Cập nhật thông tin thành công!");
+			} else {
+				request.setAttribute("error", "Có lỗi xảy ra, vui lòng thử lại.");
+			}
+
+		} else {
+			request.setAttribute("error", "Không tìm thấy thông tin khách hàng.");
 		}
+		request.getRequestDispatcher("/updateProfile.jsp").forward(request, response);
 	}
 
 	/**

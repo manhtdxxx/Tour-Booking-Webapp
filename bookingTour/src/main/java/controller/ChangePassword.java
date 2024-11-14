@@ -57,15 +57,15 @@ public class ChangePassword extends HttpServlet {
 
 		if (khachHang == null) {
 			error = "Bạn chưa đăng nhập vào hệ thống!";
-			url = "/changepassword.jsp";
+			url = "/changePassword.jsp";
 		} else {
 			if (!currentPassword.equals(khachHang.getPassword())) {
 				error = "Mật khẩu hiện tại không chính xác!";
-				url = "/changepassword.jsp";
+				url = "/changePassword.jsp";
 			} else {
 				if (!newPassword.equals(confirmPassword)) {
 					error = "Mật khẩu nhập lại không khớp!";
-					url = "/changepassword.jsp";
+					url = "/changePassword.jsp";
 				} else {
 					khachHang.setPassword(newPassword);
 
@@ -82,7 +82,7 @@ public class ChangePassword extends HttpServlet {
 						return;
 					} else {
 						error = "Quá trình thay đổi mật khẩu không thành công!";
-						url = "/changepassword.jsp";
+						url = "/changePassword.jsp";
 					}
 				}
 			}

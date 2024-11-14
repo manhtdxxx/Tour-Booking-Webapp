@@ -277,4 +277,19 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 		return result;
 	}
 
+	public boolean updateInfo(KhachHang obj) {
+		String sql = "UPDATE khachhang SET tenKH = ?, gioiTinh = ?, ngaySinh = ?, soDienThoai = ?, email = ? WHERE maKH = ?";
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, obj.getTenKH());
+			stmt.setString(2, obj.getGioiTinh());
+			stmt.setDate(3, obj.getNgaySinh());
+			stmt.setString(4, obj.getSoDienThoai());
+			stmt.setString(5, obj.getEmail());
+			stmt.setString(6, obj.getMaKH());
+			return stmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

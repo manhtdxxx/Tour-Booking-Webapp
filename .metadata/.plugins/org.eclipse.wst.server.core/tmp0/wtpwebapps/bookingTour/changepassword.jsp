@@ -87,7 +87,9 @@ h2 {
 	%>
 	<div class="alert alert-danger text-center py-4 px-5 shadow-lg rounded-pill" role="alert"
 		aria-live="assertive">
-		<h1 class="display-5 fw-normal">Bạn cần đăng nhập <br> để truy cập trang này!</h1>
+		<h1 class="display-5 fw-normal">
+			Bạn cần đăng nhập <br> để truy cập trang này!
+		</h1>
 		<div class="mt-4">
 			Vui lòng quay lại <a href="index.jsp" class="fw-bolder text-primary text-decoration-underline">trang
 				chủ</a>.
@@ -97,9 +99,6 @@ h2 {
 				đăng nhập</a> để tiếp tục.
 		</div>
 	</div>
-
-
-
 	<%
 	} else {
 	String error = (String) request.getAttribute("error");

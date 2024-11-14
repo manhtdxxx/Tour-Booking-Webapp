@@ -64,8 +64,8 @@
 						<%=khachHang.getUsername()%>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-end shadow">
-						<li><a class="dropdown-item" href="profile.jsp">Thông tin cá nhân</a></li>
-						<li><a class="dropdown-item" href="changepassword.jsp">Đổi mật khẩu</a></li>
+						<li><a class="dropdown-item" href="updateProfile.jsp">Thông tin cá nhân</a></li>
+						<li><a class="dropdown-item" href="changePassword.jsp">Đổi mật khẩu</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="do-logout">Thoát</a></li>
 					</ul>

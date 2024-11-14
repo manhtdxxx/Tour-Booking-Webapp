@@ -95,7 +95,7 @@ h1:hover {
 	String password = (String) request.getAttribute("password");
 	String password2 = (String) request.getAttribute("password2");
 	%>
-	
+
 	<div class="container">
 		<div class="text-center mb-4">
 			<h1>Đăng ký tài khoản</h1>
@@ -142,39 +142,40 @@ h1:hover {
 					onchange="showSubmitButton()"> <label class="form-check-label">I agree to the <a
 					href="#">terms of service</a></label>
 			</div>
-			<button type="submit" class="btn btn-primary" id="submit" style="visibility: hidden;">Đăng ký</button>
+			<button type="submit" class="btn btn-primary" id="submit" style="visibility: hidden;">Đăng
+				ký</button>
 		</form>
 	</div>
-
-	<script type="text/javascript">
-		function confirmPassword() {
-			let pass_1 = document.getElementById("password").value;
-			let pass_2 = document.getElementById("password2").value;
-			let msg = document.getElementById("msg");
-			if (pass_1 !== pass_2) {
-				msg.innerHTML = "Mật khẩu không khớp!";
-				return false;
-			} else {
-				msg.innerHTML = "";
-				return true;
-			}
-		}
-
-		function showSubmitButton() {
-			let username = document.getElementById("username").value.trim();
-			let email = document.getElementById("email").value.trim();
-			let password = document.getElementById("password").value.trim();
-			let password2 = document.getElementById("password2").value.trim();
-			let agree = document.getElementById("agree").checked;
-			let submitButton = document.getElementById("submit");
-
-			if (username && email && password && password2 && confirmPassword()
-					&& agree) {
-				submitButton.style.visibility = "visible";
-			} else {
-				submitButton.style.visibility = "hidden";
-			}
-		}
-	</script>
 </body>
+
+<script type="text/javascript">
+	function confirmPassword() {
+		let pass_1 = document.getElementById("password").value;
+		let pass_2 = document.getElementById("password2").value;
+		let msg = document.getElementById("msg");
+		if (pass_1 !== pass_2) {
+			msg.innerHTML = "Mật khẩu không khớp!";
+			return false;
+		} else {
+			msg.innerHTML = "";
+			return true;
+		}
+	}
+
+	function showSubmitButton() {
+		let username = document.getElementById("username").value.trim();
+		let email = document.getElementById("email").value.trim();
+		let password = document.getElementById("password").value.trim();
+		let password2 = document.getElementById("password2").value.trim();
+		let agree = document.getElementById("agree").checked;
+		let submitButton = document.getElementById("submit");
+
+		if (username && email && password && password2 && confirmPassword()
+				&& agree) {
+			submitButton.style.visibility = "visible";
+		} else {
+			submitButton.style.visibility = "hidden";
+		}
+	}
+</script>
 </html>
