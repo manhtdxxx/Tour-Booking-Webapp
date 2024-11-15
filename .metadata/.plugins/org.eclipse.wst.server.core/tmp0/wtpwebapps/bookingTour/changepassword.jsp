@@ -11,70 +11,78 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-/* Background gradient */
+/* Custom styles for the page */
 body {
-	background: linear-gradient(to right, #89f7fe, #66a6ff);
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f8f9fa;
+	font-family: 'Arial', sans-serif;
 }
-/* Form container styling */
+
 .form-container {
-	max-width: 450px;
-	padding: 2.5rem;
-	background-color: #ffffff;
-	border-radius: 12px;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-	margin: 0 1.5rem;
-	transition: transform 0.3s ease;
-	min-width: 400px;
-	position: relative;
-}
-/* Hover effect on container */
-.form-container:hover {
-	transform: scale(1.02);
-}
-/* Header style */
-h2 {
-	font-weight: bold;
-	color: #343a40;
-}
-/* Labels styling */
-.form-label {
-	color: #495057;
-	font-weight: 600;
-}
-/* Input fields styling */
-.form-control {
-	border: 2px solid #ced4da;
+	background-color: white;
 	border-radius: 8px;
-	padding: 0.5rem;
-	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 3rem;
+	width: 100%;
+	max-width: 500px;
+	margin-top: 50px;
 }
 
-.form-control:focus {
-	border-color: #66a6ff;
-	box-shadow: 0 0 8px rgba(102, 166, 255, 0.3);
+.form-container h1 {
+	font-size: 2.5rem;
+	margin-bottom: 1.5rem;
 }
-/* Button styling */
-.btn-primary {
-	background-color: #66a6ff;
-	border-color: #66a6ff;
-	padding: 0.6rem;
+
+.form-container .form-label {
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.form-container input {
+	border-radius: 4px;
+	font-size: 1rem;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	width: 100%;
+}
+
+.form-container input:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-container button {
+	padding: 0.75rem;
 	font-size: 1.1rem;
-	font-weight: 600;
-	border-radius: 8px;
-	transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s ease;
+	border-radius: 4px;
 }
 
-.btn-primary:hover {
-	background-color: #0056b3;
-	box-shadow: 0 6px 16px rgba(0, 91, 187, 0.4);
-	transform: translateY(-2px);
+.form-container .alert {
+	margin-bottom: 1rem;
+}
+
+#msg {
+	font-size: 0.9rem;
+}
+
+.footer {
+	padding: 2rem 0;
+	background-color: #343a40;
+	color: white;
+	text-align: center;
+}
+
+.footer a {
+	color: #ffc107;
+	text-decoration: none;
+}
+
+.footer a:hover {
+	text-decoration: underline;
 }
 </style>
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100">
-
+<body>
 	<%
 	Object obj = session.getAttribute("khachHang");
 	KhachHang khachHang = null;
@@ -85,103 +93,102 @@ h2 {
 
 	if (khachHang == null) {
 	%>
-	<div class="alert alert-danger text-center py-4 px-5 shadow-lg rounded-pill" role="alert"
-		aria-live="assertive">
-		<h1 class="display-5 fw-normal">
-			Bạn cần đăng nhập <br> để truy cập trang này!
-		</h1>
-		<div class="mt-4">
-			Vui lòng quay lại <a href="index.jsp" class="fw-bolder text-primary text-decoration-underline">trang
-				chủ</a>.
-		</div>
-		<div class="mt-1">
-			Hoặc truy cập <a href="login.jsp" class="fw-bold text-primary text-decoration-underline">trang
-				đăng nhập</a> để tiếp tục.
-		</div>
+	<div class="container-fluid bg-light text-center py-5" role="alert">
+		<h1 class="fw-bold text-danger">Bạn cần đăng nhập để truy cập trang này!</h1>
+		<h5 class="mt-4">
+			Vui lòng quay lại <a href="index.jsp" class="fw-bold text-primary">trang chủ</a>.
+		</h5>
+		<h5 class="mt-2">
+			Hoặc truy cập <a href="login.jsp" class="fw-bold text-primary">trang đăng nhập</a> để tiếp tục.
+		</h5>
 	</div>
 	<%
 	} else {
-	String error = (String) request.getAttribute("error");
-	String success = (String) request.getAttribute("success");
-
-	error = (error != null) ? error : "";
-	success = (success != null) ? success : "";
 	%>
+	<!-- NAVBAR -->
+	<jsp:include page="layout/nav.jsp"></jsp:include>
 
-	<div class="form-container">
-		<h1 class="text-center mb-4">Đổi Mật Khẩu</h1>
+	<!-- CHANGE PASSWORD FORM -->
+	<section class="d-flex justify-content-center">
+		<div class="form-container">
+			<h1 class="text-center mb-4">Đổi Mật Khẩu</h1>
 
-		<!-- Error/Success Message -->
-		<%
-		if (!error.isEmpty()) {
-		%>
-		<div class="alert alert-danger alert-dismissible fade show" role="alert">
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-			<strong>Lỗi: </strong>
-			<%=error%>
+			<!-- Error/Success Message -->
+			<%
+			String error = (String) request.getAttribute("error");
+			String success = (String) request.getAttribute("success");
+			error = (error != null) ? error : "";
+			success = (success != null) ? success : "";
+
+			if (!error.isEmpty()) {
+			%>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<strong>Lỗi: </strong><%=error%>
+			</div>
+			<%
+			}
+			if (!success.isEmpty()) {
+			%>
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<strong>Thành công: </strong><%=success%>
+			</div>
+			<%
+			request.removeAttribute("success");
+			}
+			%>
+
+			<form action="change-password" method="post">
+				<div class="mb-3">
+					<label for="currentPassword" class="form-label">Mật khẩu hiện tại</label> <input
+						type="password" class="form-control" id="currentPassword" name="currentPassword"
+						placeholder="Nhập mật khẩu hiện tại" required>
+				</div>
+				<div class="mb-3">
+					<label for="newPassword" class="form-label">Mật khẩu mới</label> <input type="password"
+						class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới">
+				</div>
+				<div class="mb-3">
+					<label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label> <input
+						type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+						placeholder="Xác nhận mật khẩu mới" required>
+					<div id="msg" class="text-danger fw-medium mb-3 mt-1"></div>
+				</div>
+				<button type="submit" class="btn btn-primary w-100 mt-1">Đổi Mật Khẩu</button>
+			</form>
 		</div>
-		<%
-		}
+	</section>
 
-		if (!success.isEmpty()) {
-		%>
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-			<strong>Thành công: </strong>
-			<%=success%>
-		</div>
-		<%
-		request.removeAttribute("success");
-		}
-		%>
-
-		<form action="change-password" method="post">
-			<div class="mb-3">
-				<label for="currentPassword" class="form-label">Current Password</label> <input type="password"
-					class="form-control" id="currentPassword" name="currentPassword"
-					placeholder="Nhập mật khẩu hiện tại" required>
-			</div>
-			<div class="mb-3">
-				<label for="newPassword" class="form-label">New Password</label> <input type="password"
-					class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới">
-			</div>
-			<div class="mb-3">
-				<label for="confirmPassword" class="form-label">Confirm Password</label> <input type="password"
-					class="form-control" id="confirmPassword" name="confirmPassword"
-					placeholder="Xác nhận mật khẩu mới" required>
-				<div id="msg" class="text-danger fw-medium mb-3 mt-1"></div>
-			</div>
-			<button type="submit" class="btn btn-primary w-100">Đổi Mật Khẩu</button>
-		</form>
-	</div>
+	<!-- FOOTER -->
+	<jsp:include page="layout/footer.jsp"></jsp:include>
 	<%
 	}
 	%>
-
-	<script type="text/javascript">
-		document.addEventListener("DOMContentLoaded", confirmPassword); // Run on page load
-
-		function confirmPassword() {
-			let pass_1 = document.getElementById("newPassword").value;
-			let pass_2 = document.getElementById("confirmPassword").value;
-			let msg = document.getElementById("msg");
-			let submitBtn = document.querySelector("button[type='submit']");
-
-			if (pass_1 !== pass_2) {
-				msg.innerHTML = "Mật khẩu không khớp!";
-				submitBtn.disabled = true;
-			} else {
-				msg.innerHTML = "";
-				submitBtn.disabled = false;
-			}
-		}
-
-		// Event listeners for keyup on both fields
-		document.getElementById("newPassword").addEventListener("keyup",
-				confirmPassword);
-		document.getElementById("confirmPassword").addEventListener("keyup",
-				confirmPassword);
-	</script>
-
 </body>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", confirmPassword); // Run on page load
+
+	function confirmPassword() {
+		let pass_1 = document.getElementById("newPassword").value;
+		let pass_2 = document.getElementById("confirmPassword").value;
+		let msg = document.getElementById("msg");
+		let submitBtn = document.querySelector("button[type='submit']");
+
+		if (pass_1 !== pass_2) {
+			msg.innerHTML = "Mật khẩu không khớp!";
+			submitBtn.disabled = true;
+		} else {
+			msg.innerHTML = "";
+			submitBtn.disabled = false;
+		}
+	}
+
+	// Event listeners for keyup on both fields
+	document.getElementById("newPassword").addEventListener("keyup",
+			confirmPassword);
+	document.getElementById("confirmPassword").addEventListener("keyup",
+			confirmPassword);
+</script>
 </html>

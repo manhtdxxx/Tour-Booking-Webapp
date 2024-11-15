@@ -9,84 +9,65 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<style type="text/css">
+<style>
 body {
-	background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #424242;
+	background: linear-gradient(to right, #6a11cb, #2575fc);
+	font-family: 'Arial', sans-serif;
+	color: #fff;
 }
 
 .container {
-	max-width: 500px;
-	background: #ffffff;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-	border-radius: 12px;
-	padding: 2.5rem 3rem;
-	border: 1px solid #e0e0e0;
-	transition: all 0.3s ease;
-}
-
-.container:hover {
-	box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-	transform: translateY(-3px);
-}
-
-h1 {
-	color: #1976d2;
-	font-weight: 700;
-	transition: color 0.3s;
-}
-
-h1:hover {
-	color: #0d47a1;
-}
-
-.red {
-	color: #d32f2f;
-}
-
-.form-label {
-	font-weight: 500;
-	color: #616161;
-}
-
-.form-check-label a {
-	color: #1976d2;
-	text-decoration: none;
-	transition: color 0.3s ease;
-}
-
-.form-check-label a:hover {
-	color: #0d47a1;
+	max-width: 450px;
+	background: linear-gradient(145deg, #ffffff, #e6e6e6);
+	border-radius: 15px;
+	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2), -4px -4px 15px
+		rgba(255, 255, 255, 0.3);
+	padding: 2rem;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	color: #333;
 }
 
 .btn-primary {
-	width: 100%;
-	background-color: #1976d2;
-	border-color: #1976d2;
-	font-weight: bold;
-	transition: background-color 0.3s, transform 0.3s;
+	background-color: #2575fc;
+	border: none;
+	transition: all 0.3s ease-in-out;
 }
 
 .btn-primary:hover {
-	background-color: #0d47a1;
-	border-color: #0d47a1;
-	transform: translateY(-2px);
+	background-color: #6a11cb;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.alert-danger {
-	background-color: #ffebee;
-	color: #d32f2f;
-	border-color: #ffcdd2;
+.alert {
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+#msg {
+	font-size: 0.9rem;
+}
+
+#submit {
+	transition: all 0.3s ease-in-out;
 }
 </style>
 </head>
 
 <body>
+	<!-- NAVBAR -->
+	<jsp:include page="layout/nav.jsp"></jsp:include>
 
+	<!-- REGISTRATION FORM -->
 	<%
 	String error = (String) request.getAttribute("error");
 	error = (error != null) ? error : "";
@@ -95,65 +76,68 @@ h1:hover {
 	String password = (String) request.getAttribute("password");
 	String password2 = (String) request.getAttribute("password2");
 	%>
+	<section>
+		<div class="container">
+			<div class="text-center mb-4">
+				<h1 class="text-primary">Đăng ký tài khoản</h1>
+			</div>
 
-	<div class="container">
-		<div class="text-center mb-4">
-			<h1>Đăng ký tài khoản</h1>
+			<!-- Error Message -->
+			<%
+			if (!error.isEmpty()) {
+			%>
+			<div class="alert alert-danger alert-dismissible fade show">
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<strong><%=error%></strong>
+			</div>
+			<%
+			}
+			%>
+
+			<form action="do-register" method="post">
+				<div class="mb-3">
+					<label for="username" class="form-label">Username</label> <input type="text"
+						class="form-control" id="username" placeholder="Enter username" name="username"
+						value="<%=username != null ? username : ""%>" required oninput="showSubmitButton()">
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label> <input type="email" class="form-control"
+						id="email" placeholder="Enter email" name="email" value="<%=email != null ? email : ""%>"
+						required oninput="showSubmitButton()">
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Password</label> <input type="password"
+						class="form-control" id="password" placeholder="Enter password" name="password" required
+						onkeyup="confirmPassword(); showSubmitButton()">
+				</div>
+				<div class="mb-3">
+					<label for="password2" class="form-label">Confirm Password</label> <input type="password"
+						class="form-control" id="password2" placeholder="Enter password again" name="password2"
+						required onkeyup="confirmPassword(); showSubmitButton()">
+					<div id="msg" class="text-danger"></div>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" name="agree" id="agree"
+						onchange="showSubmitButton()"> <label class="form-check-label"> I agree to the
+						<a href="#">terms of service</a>
+					</label>
+				</div>
+				<button type="submit" class="btn btn-primary w-100" id="submit" style="visibility: hidden;">Đăng
+					ký</button>
+			</form>
 		</div>
+	</section>
 
-		<!-- Error Message -->
-		<%
-		if (!error.isEmpty()) {
-		%>
-		<div class="alert alert-danger alert-dismissible fade show">
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-			<strong><%=error%></strong>
-		</div>
-		<%
-		}
-		%>
-
-		<form action="do-register" method="post">
-			<div class="mb-3">
-				<label for="username" class="form-label">Username<span class="red">*</span></label> <input
-					type="text" class="form-control" id="username" placeholder="Enter username" name="username"
-					value="<%=username != null ? username : ""%>" required="required" oninput="showSubmitButton()">
-			</div>
-			<div class="mb-3">
-				<label for="email" class="form-label">Email<span class="red">*</span></label> <input
-					type="email" class="form-control" id="email" placeholder="Enter email" name="email"
-					value="<%=email != null ? email : ""%>" required="required" oninput="showSubmitButton()">
-			</div>
-			<div class="mb-3">
-				<label for="password" class="form-label">Password<span class="red">*</span></label> <input
-					type="password" class="form-control" id="password" placeholder="Enter password" name="password"
-					value="<%=password != null ? password : ""%>" required="required"
-					onkeyup="confirmPassword(); oninput=showSubmitButton()">
-			</div>
-			<div class="mb-3">
-				<label for="password2" class="form-label">Confirm Password<span class="red">*</span></label> <input
-					type="password" class="form-control" id="password2" placeholder="Enter password again"
-					name="password2" value="<%=password2 != null ? password2 : ""%>" required="required"
-					onkeyup="confirmPassword(); oninput=showSubmitButton()">
-				<div id="msg" class="text-danger mb-3 mt-1"></div>
-			</div>
-			<div class="form-check mb-3">
-				<input class="form-check-input" type="checkbox" name="agree" id="agree"
-					onchange="showSubmitButton()"> <label class="form-check-label">I agree to the <a
-					href="#">terms of service</a></label>
-			</div>
-			<button type="submit" class="btn btn-primary" id="submit" style="visibility: hidden;">Đăng
-				ký</button>
-		</form>
-	</div>
+	<!-- FOOTER -->
+	<jsp:include page="layout/footer.jsp"></jsp:include>
 </body>
 
-<script type="text/javascript">
+<script>
 	function confirmPassword() {
-		let pass_1 = document.getElementById("password").value;
-		let pass_2 = document.getElementById("password2").value;
+		let pass1 = document.getElementById("password").value;
+		let pass2 = document.getElementById("password2").value;
 		let msg = document.getElementById("msg");
-		if (pass_1 !== pass_2) {
+		if (pass1 !== pass2) {
 			msg.innerHTML = "Mật khẩu không khớp!";
 			return false;
 		} else {

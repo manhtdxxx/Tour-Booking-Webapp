@@ -14,37 +14,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 body {
-	background-color: #f8f9fa;
+	background-color: #f0f8ff;
+	font-family: 'Arial', sans-serif;
 }
 
 .form-container {
-	max-width: 600px;
+	max-width: 650px;
 	background-color: #ffffff;
-	border-radius: 8px;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 12px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	padding: 30px;
+	margin-top: 50px;
 }
 
 .form-title {
 	font-weight: bold;
 	color: #007bff;
+	font-size: 32px;
 }
 
 .form-label {
-	font-weight: 500;
-}
-
-.btn-submit, .btn-confirm, .btn-cancel {
-	background-color: #007bff;
-	border: none;
-	color: #fff;
-}
-
-.btn-submit:hover, .btn-confirm:hover {
-	background-color: #0056b3;
+	font-weight: 600;
+	color: #495057;
 }
 
 .input-disabled {
-	background-color: #f8f9fa;
+	background-color: #f1f1f1;
 	border-color: #ced4da;
 	color: #6c757d;
 }
@@ -55,13 +50,59 @@ body {
 	color: #000;
 }
 
+.button-group {
+	display: flex;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.btn-submit, .btn-confirm, .btn-cancel {
+	background-color: #007bff;
+	border: none;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 8px;
+	font-weight: 600;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn-submit:hover, .btn-confirm:hover {
+	background-color: #0056b3;
+}
+
 .btn-cancel {
 	background-color: #6c757d;
 }
 
-.button-group {
-	display: flex;
-	gap: 10px; /* Space between buttons */
+.btn-submit:disabled, .btn-confirm:disabled, .btn-cancel:disabled {
+	background-color: #ddd;
+	cursor: not-allowed;
+}
+
+.alert {
+	border-radius: 12px;
+	padding: 20px;
+	font-size: 16px;
+}
+
+.alert-success {
+	background-color: #d4edda;
+	color: #155724;
+}
+
+.alert-danger {
+	background-color: #f8d7da;
+	color: #721c24;
+}
+
+.alert .btn-close {
+	font-size: 16px;
+}
+
+@media ( max-width : 576px) {
+	.form-container {
+		padding: 20px;
+	}
 }
 </style>
 
@@ -143,37 +184,40 @@ document.addEventListener("DOMContentLoaded", function() {
 </head>
 
 <body>
-	<div class="container d-flex justify-content-center align-items-center min-vh-100">
-		<%
-		Object obj = session.getAttribute("khachHang");
-		KhachHang khachHang = null;
+	<%
+	Object obj = session.getAttribute("khachHang");
+	KhachHang khachHang = null;
 
-		if (obj != null) {
-			khachHang = (KhachHang) obj;
-		}
+	if (obj != null) {
+		khachHang = (KhachHang) obj;
+	}
 
-		if (khachHang == null) {
-		%>
-		<div class="alert alert-danger text-center py-4 px-5 shadow-lg rounded-pill" role="alert"
-			aria-live="assertive">
-			<h1 class="display-5 fw-normal">
-				Bạn cần đăng nhập <br> để truy cập trang này!
-			</h1>
-			<div class="mt-4">
-				Vui lòng quay lại <a href="index.jsp" class="fw-bold text-primary text-decoration-underline">trang
-					chủ</a>.
-			</div>
-			<div class="mt-1">
-				Hoặc truy cập <a href="login.jsp" class="fw-bold text-primary text-decoration-underline">trang
-					đăng nhập</a> để tiếp tục.
-			</div>
-		</div>
+	if (khachHang == null) {
+	%>
+	<div class="container-fluid bg-light text-center py-5" role="alert">
+		<h1 class="fw-bold text-danger">
+			Bạn cần đăng nhập để truy cập trang này!
+		</h1>
+		<h5 class="mt-4">
+			Vui lòng quay lại <a href="index.jsp" class="fw-bold text-primary text-decoration-underline">trang
+				chủ</a>.
+		</h5>
+		<h5 class="mt-2">
+			Hoặc truy cập <a href="login.jsp" class="fw-bold text-primary text-decoration-underline">trang
+				đăng nhập</a> để tiếp tục.
+		</h5>
+	</div>
 
-		<%
-		} else {
-		%>
+	<%
+	} else {
+	%>
+	<!-- NAVBAR -->
+	<jsp:include page="layout/nav.jsp"></jsp:include>
+
+	<!-- PROFILE FORM -->
+	<section class="d-flex justify-content-center">
 		<div class="form-container px-5 py-4">
-			<h1 class="text-center form-title mb-4">Thông tin cá nhân</h1>
+			<h1 class="text-center mb-4">Thông tin cá nhân</h1>
 
 			<%
 			String success = (String) request.getAttribute("success");
@@ -225,15 +269,10 @@ document.addEventListener("DOMContentLoaded", function() {
 				</div>
 
 				<div class="mb-3">
-					<label for="dob" class="form-label"><i class="bi bi-calendar-date me-1"></i>Ngày sinh</label> <input
-						type="date" class="form-control input-disabled" id="dob" name="dob"
-						value="<%=khachHang.getNgaySinh()%>" placeholder="Chọn ngày sinh" required disabled>
-				</div>
-
-				<div class="mb-3">
-					<label for="phone" class="form-label"><i class="bi bi-telephone me-1"></i>Số điện thoại</label>
-					<input type="tel" class="form-control input-disabled" id="phone" name="phone"
-						value="<%=khachHang.getSoDienThoai()%>" placeholder="Nhập số điện thoại" required disabled>
+					<label for="phoneNumber" class="form-label"><i class="bi bi-telephone me-1"></i>Số điện
+						thoại</label> <input type="tel" class="form-control input-disabled" id="phoneNumber"
+						name="phoneNumber" value="<%=khachHang.getSoDienThoai()%>" placeholder="Nhập số điện thoại"
+						required disabled>
 				</div>
 
 				<div class="mb-3">
@@ -242,20 +281,19 @@ document.addEventListener("DOMContentLoaded", function() {
 						value="<%=khachHang.getEmail()%>" placeholder="Nhập email" required disabled>
 				</div>
 
-				<div class="button-group mt-2">
-					<button type="submit" class="btn btn-confirm w-100 text-white fw-bold" style="display: none;">
-						Đồng ý</button>
-					<button type="button" class="btn btn-cancel w-100 text-white fw-bold" style="display: none;">
-						Hủy cập nhật</button>
+				<div class="button-group">
+					<button type="button" class="btn-submit" id="btnEdit">Chỉnh sửa</button>
+					<button type="submit" class="btn-confirm" style="display: none;">Đồng ý</button>
+					<button type="button" class="btn-cancel" style="display: none;">Hủy</button>
 				</div>
-
-				<button type="button" class="btn btn-submit mt-2 w-100 text-white fw-bold">Cập nhật
-					thông tin</button>
 			</form>
 		</div>
-		<%
-		}
-		%>
-	</div>
+	</section>
+
+	<!-- FOOTER -->
+	<jsp:include page="layout/footer.jsp"></jsp:include>
+	<%
+	}
+	%>
 </body>
 </html>

@@ -1,4 +1,6 @@
 INDEX VERSION 1.134
+C:\Users\manh\Documents\BookingTourWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3154854741.index
+\bookingTour\src\main\java
 C:\Users\manh\Documents\BookingTourWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1865314693.index
 \qlbh_tc070\src\main\java
 C:\Users\manh\Documents\BookingTourWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\521918662.index
