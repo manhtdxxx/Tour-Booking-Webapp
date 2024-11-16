@@ -80,10 +80,6 @@ a {
 	font-size: 0.9rem;
 }
 
-a:hover {
-	text-decoration: underline;
-}
-
 p.mt-3 {
 	font-size: 1rem;
 }
