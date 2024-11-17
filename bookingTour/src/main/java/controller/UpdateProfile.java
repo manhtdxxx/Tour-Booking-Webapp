@@ -43,7 +43,7 @@ public class UpdateProfile extends HttpServlet {
 		String name = request.getParameter("customerName");
 		String gender = request.getParameter("gender");
 		String dobStr = request.getParameter("dob");
-		String phone = request.getParameter("phone");
+		String phone = request.getParameter("phoneNumber");
 		String email = request.getParameter("email");
 
 		Date dob = dobStr != null && !dobStr.isEmpty() ? Date.valueOf(dobStr) : null;

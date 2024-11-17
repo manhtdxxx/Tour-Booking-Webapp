@@ -195,9 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	if (khachHang == null) {
 	%>
 	<div class="container-fluid bg-light text-center py-5" role="alert">
-		<h1 class="fw-bold text-danger">
-			Bạn cần đăng nhập để truy cập trang này!
-		</h1>
+		<h1 class="fw-bold text-danger">Bạn cần đăng nhập để truy cập trang này!</h1>
 		<h5 class="mt-4">
 			Vui lòng quay lại <a href="index.jsp" class="fw-bold text-primary text-decoration-underline">trang
 				chủ</a>.
@@ -266,6 +264,13 @@ document.addEventListener("DOMContentLoaded", function() {
 								class="form-check-label" for="female">Nữ</label>
 						</div>
 					</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="dob" class="form-label"><i class="bi bi-calendar me-1"></i>Ngày sinh</label> <input
+						type="date" class="form-control input-disabled" id="dob" name="dob"
+						value="<%=khachHang.getNgaySinh() != null ? khachHang.getNgaySinh() : ""%>"
+						placeholder="Chọn ngày sinh" required disabled>
 				</div>
 
 				<div class="mb-3">

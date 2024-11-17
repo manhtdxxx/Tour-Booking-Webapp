@@ -292,4 +292,53 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 			return false;
 		}
 	}
+
+	public ArrayList<KhachHang> selectPaginatedData(int offset, int limit) {
+		ArrayList<KhachHang> result = new ArrayList<>();
+		String sql = "SELECT * FROM khachhang LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+
+			st.setInt(1, limit);
+			st.setInt(2, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maKH = rs.getString("maKH");
+					String tenKH = rs.getString("tenKH");
+					String username = rs.getString("username");
+					String password = rs.getString("password");
+					String gioiTinh = rs.getString("gioiTinh");
+					Date ngaySinh = rs.getDate("ngaySinh");
+					String soDienThoai = rs.getString("soDienThoai");
+					String email = rs.getString("email");
+
+					KhachHang kh = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai,
+							email);
+					result.add(kh);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int getTotalRecords() {
+		int totalRecords = 0;
+		String sql = "SELECT COUNT(*) AS total FROM khachhang";
+
+		try (Connection conn = JDBCUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql);
+				ResultSet rs = st.executeQuery()) {
+
+			if (rs.next()) {
+				totalRecords = rs.getInt("total");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalRecords;
+	}
+
 }
