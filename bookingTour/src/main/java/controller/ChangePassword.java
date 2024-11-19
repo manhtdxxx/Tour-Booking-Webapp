@@ -34,23 +34,21 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		String currentPassword = request.getParameter("currentPassword");
 		String newPassword = request.getParameter("newPassword");
 		String confirmPassword = request.getParameter("confirmPassword");
 
+		String url = "";
 		String error = "";
 		String success = "";
-		String url = "";
 
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("khachHang");
 		KhachHang khachHang = null;
-
 		if (obj != null) {
 			khachHang = (KhachHang) obj;
 		}
@@ -60,28 +58,28 @@ public class ChangePassword extends HttpServlet {
 			url = "/changePassword.jsp";
 		} else {
 			if (!currentPassword.equals(khachHang.getPassword())) {
-				error = "Mật khẩu hiện tại không chính xác!";
+				error = "Mật khẩu hiện tại không chính xác. Vui lòng nhập lại!";
 				url = "/changePassword.jsp";
 			} else {
 				if (!newPassword.equals(confirmPassword)) {
-					error = "Mật khẩu nhập lại không khớp!";
+					error = "Mật khẩu nhập lại không khớp. Vui lòng nhập lại!";
 					url = "/changePassword.jsp";
 				} else {
 					khachHang.setPassword(newPassword);
-
-					KhachHangDAO kh_dao = new KhachHangDAO();
-					if (kh_dao.changePassword(khachHang) == 1) {
-						session.invalidate(); // Invalidate the session after password change
-						
-						session = request.getSession(true); // Start a new session to display the message
-						session.setAttribute("success", "Thay đổi mật khẩu thành công! Vui lòng đăng nhập lại.");
-
+					KhachHangDAO khDAO = new KhachHangDAO();
+					if (khDAO.changePassword(khachHang) == 1) {
+						// Invalidate the session after password change
+						session.invalidate();
+						// Start a new session to display the message
+						session = request.getSession(true);
+						session.setAttribute("success", "Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại!");
+						// Redirect to the login page
 						url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 								+ request.getContextPath();
-						response.sendRedirect(url + "/login.jsp"); // Redirect to the login page
+						response.sendRedirect(url + "/login.jsp");
 						return;
 					} else {
-						error = "Quá trình thay đổi mật khẩu không thành công!";
+						error = "Có lỗi xảy ra trong quá trình thay đổi mật khẩu. Vui lòng thử lại!";
 						url = "/changePassword.jsp";
 					}
 				}

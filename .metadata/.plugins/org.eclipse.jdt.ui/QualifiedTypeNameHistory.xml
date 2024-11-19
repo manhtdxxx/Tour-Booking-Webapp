@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="database.DoiTacDAO"/>
     <fullyQualifiedTypeName name="model.VaiTroDoiTac"/>
     <fullyQualifiedTypeName name="ThucHanh3.Service"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -26,13 +25,15 @@
     <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="database.DAOInterface"/>
     <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="database.NhanVienDAO"/>
     <fullyQualifiedTypeName name="model.DonDatHang"/>
-    <fullyQualifiedTypeName name="model.KhachHang"/>
-    <fullyQualifiedTypeName name="database.KhachHangDAO"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="database.KhachHangDAO"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="model.KhachHang"/>
     <fullyQualifiedTypeName name="database.JDBCUtil"/>
 </qualifiedTypeNameHistroy>

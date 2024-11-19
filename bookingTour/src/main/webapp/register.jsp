@@ -114,7 +114,7 @@ to {
 					<label for="password2" class="form-label">Confirm Password</label> <input type="password"
 						class="form-control" id="password2" placeholder="Enter password again" name="password2"
 						required onkeyup="confirmPassword(); showSubmitButton()">
-					<div id="msg" class="text-danger"></div>
+					<div id="msg" class="text-danger mt-1"></div>
 				</div>
 				<div class="form-check mb-3">
 					<input class="form-check-input" type="checkbox" name="agree" id="agree"

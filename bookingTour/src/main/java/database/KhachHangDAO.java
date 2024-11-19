@@ -251,8 +251,10 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 					Date ngaySinh = rs.getDate("ngaySinh");
 					String soDienThoai = rs.getString("soDienThoai");
 					String email = rs.getString("email");
+					String status = rs.getString("status");
 
-					result = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai, email);
+					result = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai, email,
+							status);
 				}
 			}
 		} catch (SQLException e) {
@@ -312,9 +314,10 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 					Date ngaySinh = rs.getDate("ngaySinh");
 					String soDienThoai = rs.getString("soDienThoai");
 					String email = rs.getString("email");
+					String status = rs.getString("status");
 
 					KhachHang kh = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai,
-							email);
+							email, status);
 					result.add(kh);
 				}
 			}
@@ -324,7 +327,7 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 		return result;
 	}
 
-	public int getTotalRecords() {
+	public int countTotalRecords() {
 		int totalRecords = 0;
 		String sql = "SELECT COUNT(*) AS total FROM khachhang";
 
@@ -339,6 +342,76 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 			e.printStackTrace();
 		}
 		return totalRecords;
+	}
+
+	public int countActiveRecords() {
+		int count = 0;
+		String sql = "SELECT COUNT(*) FROM khachhang WHERE status = 'active'";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					count = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public int insertIncludingStatus(KhachHang obj) {
+		int result = 0;
+		String sql = "INSERT INTO khachhang (maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai, email, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+
+			st.setString(1, obj.getMaKH());
+			st.setString(2, obj.getTenKH());
+			st.setString(3, obj.getUsername());
+			st.setString(4, obj.getPassword());
+			st.setString(5, obj.getGioiTinh());
+			st.setDate(6, obj.getNgaySinh());
+			st.setString(7, obj.getSoDienThoai());
+			st.setString(8, obj.getEmail());
+			st.setString(9, obj.getStatus());
+
+			result = st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean toggleCustomerStatus(KhachHang obj) {
+		String getStatusQuery = "SELECT status FROM khachhang WHERE maKH = ?";
+		String updateStatusQuery = "UPDATE khachhang SET status = ? WHERE maKH = ?";
+
+		try (Connection conn = JDBCUtil.getConnection();
+				PreparedStatement getStatusStmt = conn.prepareStatement(getStatusQuery);
+				PreparedStatement updateStatusStmt = conn.prepareStatement(updateStatusQuery)) {
+
+			// Get the current status
+			getStatusStmt.setString(1, obj.getMaKH());
+			ResultSet rs = getStatusStmt.executeQuery();
+
+			if (rs.next()) {
+				String currentStatus = rs.getString("status");
+				String newStatus = "active".equalsIgnoreCase(currentStatus) ? "inactive" : "active";
+
+				// Update the status in the database
+				updateStatusStmt.setString(1, newStatus);
+				updateStatusStmt.setString(2, obj.getMaKH());
+				if (updateStatusStmt.executeUpdate() > 0) {
+					// Update the status in the object
+					obj.setStatus(newStatus);
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

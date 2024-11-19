@@ -12,6 +12,7 @@ public class KhachHang {
 	private Date ngaySinh;
 	private String soDienThoai;
 	private String email;
+	private String status;
 
 	public KhachHang() {
 	}
@@ -26,6 +27,20 @@ public class KhachHang {
 		this.ngaySinh = ngaySinh;
 		this.soDienThoai = soDienThoai;
 		this.email = email;
+	}
+
+	// Constructor includes "status" column
+	public KhachHang(String maKH, String tenKH, String username, String password, String gioiTinh, Date ngaySinh,
+			String soDienThoai, String email, String status) {
+		this.maKH = maKH;
+		this.tenKH = tenKH;
+		this.username = username;
+		this.password = password;
+		this.gioiTinh = gioiTinh;
+		this.ngaySinh = ngaySinh;
+		this.soDienThoai = soDienThoai;
+		this.email = email;
+		this.status = status;
 	}
 
 	public String getMaKH() {
@@ -90,6 +105,14 @@ public class KhachHang {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

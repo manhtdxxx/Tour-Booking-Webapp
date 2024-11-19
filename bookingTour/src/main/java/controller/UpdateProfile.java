@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,6 @@ public class UpdateProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -43,10 +43,9 @@ public class UpdateProfile extends HttpServlet {
 		String name = request.getParameter("customerName");
 		String gender = request.getParameter("gender");
 		String dobStr = request.getParameter("dob");
+		Date dob = dobStr != null && !dobStr.isEmpty() ? Date.valueOf(dobStr) : null;
 		String phone = request.getParameter("phoneNumber");
 		String email = request.getParameter("email");
-
-		Date dob = dobStr != null && !dobStr.isEmpty() ? Date.valueOf(dobStr) : null;
 
 		HttpSession session = request.getSession();
 		KhachHang khachHang = (KhachHang) session.getAttribute("khachHang");
@@ -64,13 +63,16 @@ public class UpdateProfile extends HttpServlet {
 				session.setAttribute("khachHang", khachHang);
 				request.setAttribute("success", "Cập nhật thông tin thành công!");
 			} else {
-				request.setAttribute("error", "Có lỗi xảy ra, vui lòng thử lại.");
+				request.setAttribute("error", "Có lỗi xảy ra trong quá trình cập nhật thông tin. vui lòng thử lại.");
 			}
 
 		} else {
 			request.setAttribute("error", "Không tìm thấy thông tin khách hàng.");
 		}
-		request.getRequestDispatcher("/updateProfile.jsp").forward(request, response);
+
+		String url = "/updateProfile.jsp";
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+		rd.forward(request, response);
 	}
 
 	/**

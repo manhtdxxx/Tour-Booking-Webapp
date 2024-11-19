@@ -86,7 +86,6 @@ body {
 	<%
 	Object obj = session.getAttribute("khachHang");
 	KhachHang khachHang = null;
-
 	if (obj != null) {
 		khachHang = (KhachHang) obj;
 	}

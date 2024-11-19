@@ -45,11 +45,10 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String rememberMe = request.getParameter("remember");
@@ -58,36 +57,40 @@ public class Login extends HttpServlet {
 		current_kh.setUsername(username);
 		current_kh.setPassword(password);
 
-		KhachHangDAO kh_dao = new KhachHangDAO();
-		KhachHang existed_kh = kh_dao.selectByUsernameAndPassword(current_kh);
+		KhachHangDAO khDAO = new KhachHangDAO();
+		KhachHang existed_kh = khDAO.selectByUsernameAndPassword(current_kh);
 
 		String url = "";
 
 		if (existed_kh != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("khachHang", existed_kh);
-			url = "/index.jsp";
+			if ("active".equals(existed_kh.getStatus())) {
+				HttpSession session = request.getSession();
+				session.setAttribute("khachHang", existed_kh);
+				url = "/index.jsp";
 
-			// Handle "Remember Me" functionality
-			if ("on".equals(rememberMe)) {
-				// Set cookies for username and password
-				Cookie usernameCookie = new Cookie("username", username);
-				Cookie passwordCookie = new Cookie("password", password);
-				usernameCookie.setMaxAge(1 * 24 * 60 * 60); // 1 day
-				passwordCookie.setMaxAge(1 * 24 * 60 * 60); // 1 day
-				response.addCookie(usernameCookie);
-				response.addCookie(passwordCookie);
+				// Handle "Remember Me" functionality
+				if ("on".equals(rememberMe)) {
+					Cookie usernameCookie = new Cookie("username", username);
+					Cookie passwordCookie = new Cookie("password", password);
+					usernameCookie.setMaxAge(1 * 24 * 60 * 60); // 1 day
+					passwordCookie.setMaxAge(1 * 24 * 60 * 60); // 1 day
+					response.addCookie(usernameCookie);
+					response.addCookie(passwordCookie);
+				} else {
+					Cookie usernameCookie = new Cookie("username", "");
+					Cookie passwordCookie = new Cookie("password", "");
+					usernameCookie.setMaxAge(0); // Expire the cookie
+					passwordCookie.setMaxAge(0); // Expire the cookie
+					response.addCookie(usernameCookie);
+					response.addCookie(passwordCookie);
+				}
 			} else {
-				// If "remember me" is not selected, clear any existing cookies
-				Cookie usernameCookie = new Cookie("username", "");
-				Cookie passwordCookie = new Cookie("password", "");
-				usernameCookie.setMaxAge(0); // Expire the cookie
-				passwordCookie.setMaxAge(0); // Expire the cookie
-				response.addCookie(usernameCookie);
-				response.addCookie(passwordCookie);
+				request.setAttribute("error",
+						"Tài khoản của bạn hiện đang không hoạt động. Vui lòng liên hệ quản trị viên!");
+				url = "/login.jsp";
 			}
 		} else {
-			request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng! Vui lòng nhập lại.");
+			request.setAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng nhập lại!");
 			url = "/login.jsp";
 		}
 

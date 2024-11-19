@@ -103,7 +103,6 @@ p.mt-3 {
 			<%
 			String error = (String) request.getAttribute("error");
 			error = (error != null) ? error : "";
-
 			if (!error.isEmpty()) {
 			%>
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -118,7 +117,6 @@ p.mt-3 {
 			<%
 			String success = (String) session.getAttribute("success");
 			success = (success != null) ? success : "";
-
 			if (!success.isEmpty()) {
 			%>
 			<div class="alert alert-success alert-dismissible fade show" role="alert">

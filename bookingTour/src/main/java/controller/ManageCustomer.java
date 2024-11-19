@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +31,13 @@ public class ManageCustomer extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
-		if (action != null && action.equals("paginate")) {
-			clickPreviousNext(request, response);
+
+		if (action != null && action.equals("delete")) {
+			deleteCustomer(request, response);
+		}
+		
+		if (action != null && action.equals("activate")) {
+			changeCustomerStatus(request, response);
 		}
 	}
 
@@ -44,12 +50,16 @@ public class ManageCustomer extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-	protected void clickPreviousNext(HttpServletRequest request, HttpServletResponse response)
+	private void deleteCustomer(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Get current page, default to 1
-		int currentPage = 1;
-		if (request.getParameter("page") != null) {
-			currentPage = Integer.parseInt(request.getParameter("page"));
-		}
+		// TODO Auto-generated method stub
+
+	}
+	
+	private void changeCustomerStatus(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String maKH = request.getParameter("maKH");
+		String status = request.getParameter("status");
 	}
 }
