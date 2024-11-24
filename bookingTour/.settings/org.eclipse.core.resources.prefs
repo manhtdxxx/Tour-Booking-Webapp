@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/main/java/controller/ChangePassword.java=UTF-8
+encoding//src/main/java/controller/KhachHangController.java=UTF-8
 encoding//src/main/java/controller/Login.java=UTF-8
 encoding//src/main/java/controller/Register.java=UTF-8
-encoding//src/main/java/controller/UpdateProfile.java=UTF-8
 encoding/<project>=UTF-8

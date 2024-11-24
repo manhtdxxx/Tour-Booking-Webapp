@@ -327,6 +327,45 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 		return result;
 	}
 
+	public ArrayList<KhachHang> selectPaginatedWithSortedData(int offset, int limit, String sortColumn,
+			String sortOrder) {
+		ArrayList<KhachHang> result = new ArrayList<>();
+		String query = "SELECT * FROM KhachHang";
+
+		// Add sorting logic
+		if (sortColumn != null && !sortColumn.isEmpty()) {
+			query += " ORDER BY " + sortColumn + " " + sortOrder;
+		}
+
+		query += " LIMIT ?, ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(query)) {
+			st.setInt(1, offset);
+			st.setInt(2, limit);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maKH = rs.getString("maKH");
+					String tenKH = rs.getString("tenKH");
+					String username = rs.getString("username");
+					String password = rs.getString("password");
+					String gioiTinh = rs.getString("gioiTinh");
+					Date ngaySinh = rs.getDate("ngaySinh");
+					String soDienThoai = rs.getString("soDienThoai");
+					String email = rs.getString("email");
+					String status = rs.getString("status");
+
+					KhachHang kh = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai,
+							email, status);
+					result.add(kh);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public int countTotalRecords() {
 		int totalRecords = 0;
 		String sql = "SELECT COUNT(*) AS total FROM khachhang";
@@ -412,6 +451,64 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public ArrayList<KhachHang> searchIdOrName(String searchQuery, int offset, int limit, String sortColumn,
+			String sortOrder) {
+		ArrayList<KhachHang> result = new ArrayList<>();
+		String query = "SELECT * FROM KhachHang WHERE maKH LIKE ? OR tenKH LIKE ?";
+
+		// Add sorting logic
+		if (sortColumn != null && !sortColumn.isEmpty()) {
+			query += " ORDER BY " + sortColumn + " " + sortOrder;
+		}
+
+		query += " LIMIT ?, ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(query)) {
+			st.setString(1, "%" + searchQuery + "%");
+			st.setString(2, "%" + searchQuery + "%");
+			st.setInt(3, offset);
+			st.setInt(4, limit);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maKH = rs.getString("maKH");
+					String tenKH = rs.getString("tenKH");
+					String username = rs.getString("username");
+					String password = rs.getString("password");
+					String gioiTinh = rs.getString("gioiTinh");
+					Date ngaySinh = rs.getDate("ngaySinh");
+					String soDienThoai = rs.getString("soDienThoai");
+					String email = rs.getString("email");
+					String status = rs.getString("status");
+
+					KhachHang kh = new KhachHang(maKH, tenKH, username, password, gioiTinh, ngaySinh, soDienThoai,
+							email, status);
+					result.add(kh);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int countSearchResults(String query) {
+		String sql = "SELECT COUNT(*) FROM KhachHang WHERE maKH LIKE ? OR tenKH LIKE ?";
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, "%" + query + "%");
+			st.setString(2, "%" + query + "%");
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

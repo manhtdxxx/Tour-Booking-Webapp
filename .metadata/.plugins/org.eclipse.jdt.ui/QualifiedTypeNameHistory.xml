@@ -9,7 +9,6 @@
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="database.DatTourDAO"/>
     <fullyQualifiedTypeName name="model.ChiTietDatTour"/>
-    <fullyQualifiedTypeName name="database.DAO_Interface"/>
     <fullyQualifiedTypeName name="model.Tour"/>
     <fullyQualifiedTypeName name="database.TourDAO"/>
     <fullyQualifiedTypeName name="model.DatTour"/>
@@ -26,14 +25,19 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="database.DAOInterface"/>
-    <fullyQualifiedTypeName name="model.NhanVien"/>
-    <fullyQualifiedTypeName name="database.NhanVienDAO"/>
     <fullyQualifiedTypeName name="model.DonDatHang"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
-    <fullyQualifiedTypeName name="database.KhachHangDAO"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="model.KhachHang"/>
+    <fullyQualifiedTypeName name="database.KhachHangDAO"/>
+    <fullyQualifiedTypeName name="java.awt.MediaTracker"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="database.DAO_Interface"/>
+    <fullyQualifiedTypeName name="database.NhanVienDAO"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="database.JDBCUtil"/>
+    <fullyQualifiedTypeName name="java.net.URLEncoder"/>
+    <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
 </qualifiedTypeNameHistroy>
