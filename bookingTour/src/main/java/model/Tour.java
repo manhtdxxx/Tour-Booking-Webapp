@@ -12,16 +12,21 @@ public class Tour {
 	private String phuongTienDiChuyen;
 	private Timestamp thoiGianXuatPhat;
 	private Timestamp thoiGianKetThuc;
-	private int giaVe;
+	private long giaVeHienTai;
+	private long giaVeLucTruoc;
 	private int soLuongVeToiDa;
+	private int soLuongVeHienCo;
 	private String moTa;
+	private String filePath;
 
+	// Default constructor
 	public Tour() {
 	}
 
+	// Constructor with all fields
 	public Tour(String maTour, LoaiTour loaiTour, String tenTour, String diemXuatPhat, String diemKetThuc,
-			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, int giaVe,
-			int soLuongVeToiDa, String moTa) {
+			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, long giaVeHienTai,
+			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa, String filePath) {
 		this.maTour = maTour;
 		this.loaiTour = loaiTour;
 		this.tenTour = tenTour;
@@ -30,11 +35,34 @@ public class Tour {
 		this.phuongTienDiChuyen = phuongTienDiChuyen;
 		this.thoiGianXuatPhat = thoiGianXuatPhat;
 		this.thoiGianKetThuc = thoiGianKetThuc;
-		this.giaVe = giaVe;
+		this.giaVeHienTai = giaVeHienTai;
+		this.giaVeLucTruoc = giaVeLucTruoc;
 		this.soLuongVeToiDa = soLuongVeToiDa;
+		this.soLuongVeHienCo = soLuongVeHienCo;
+		this.moTa = moTa;
+		this.filePath = filePath;
+	}
+
+	// not including filePath
+	public Tour(String maTour, LoaiTour loaiTour, String tenTour, String diemXuatPhat, String diemKetThuc,
+			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, long giaVeHienTai,
+			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa) {
+		this.maTour = maTour;
+		this.loaiTour = loaiTour;
+		this.tenTour = tenTour;
+		this.diemXuatPhat = diemXuatPhat;
+		this.diemKetThuc = diemKetThuc;
+		this.phuongTienDiChuyen = phuongTienDiChuyen;
+		this.thoiGianXuatPhat = thoiGianXuatPhat;
+		this.thoiGianKetThuc = thoiGianKetThuc;
+		this.giaVeHienTai = giaVeHienTai;
+		this.giaVeLucTruoc = giaVeLucTruoc;
+		this.soLuongVeToiDa = soLuongVeToiDa;
+		this.soLuongVeHienCo = soLuongVeHienCo;
 		this.moTa = moTa;
 	}
 
+	// Getter and Setter methods
 	public String getMaTour() {
 		return maTour;
 	}
@@ -99,12 +127,20 @@ public class Tour {
 		this.thoiGianKetThuc = thoiGianKetThuc;
 	}
 
-	public int getGiaVe() {
-		return giaVe;
+	public long getGiaVeHienTai() {
+		return giaVeHienTai;
 	}
 
-	public void setGiaVe(int giaVe) {
-		this.giaVe = giaVe;
+	public void setGiaVeHienTai(long giaVeHienTai) {
+		this.giaVeHienTai = giaVeHienTai;
+	}
+
+	public long getGiaVeLucTruoc() {
+		return giaVeLucTruoc;
+	}
+
+	public void setGiaVeLucTruoc(long giaVeLucTruoc) {
+		this.giaVeLucTruoc = giaVeLucTruoc;
 	}
 
 	public int getSoLuongVeToiDa() {
@@ -115,6 +151,14 @@ public class Tour {
 		this.soLuongVeToiDa = soLuongVeToiDa;
 	}
 
+	public int getSoLuongVeHienCo() {
+		return soLuongVeHienCo;
+	}
+
+	public void setSoLuongVeHienCo(int soLuongVeHienCo) {
+		this.soLuongVeHienCo = soLuongVeHienCo;
+	}
+
 	public String getMoTa() {
 		return moTa;
 	}
@@ -123,6 +167,15 @@ public class Tour {
 		this.moTa = moTa;
 	}
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	// Equals and hashCode based on primary key
 	@Override
 	public int hashCode() {
 		return Objects.hash(maTour);
@@ -132,20 +185,9 @@ public class Tour {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		Tour other = (Tour) obj;
 		return Objects.equals(maTour, other.maTour);
 	}
-
-	@Override
-	public String toString() {
-		return "Tour [maTour=" + maTour + ", loaiTour=" + loaiTour + ", tenTour=" + tenTour + ", diemXuatPhat="
-				+ diemXuatPhat + ", diemKetThuc=" + diemKetThuc + ", phuongTienDiChuyen=" + phuongTienDiChuyen
-				+ ", thoiGianXuatPhat=" + thoiGianXuatPhat + ", thoiGianKetThuc=" + thoiGianKetThuc + ", giaVe=" + giaVe
-				+ ", soLuongVeToiDa=" + soLuongVeToiDa + ", moTa=" + moTa + "]";
-	}
-
 }

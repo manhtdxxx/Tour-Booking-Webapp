@@ -453,7 +453,7 @@ public class KhachHangDAO implements DAO_Interface<KhachHang> {
 		return false;
 	}
 
-	public ArrayList<KhachHang> searchIdOrName(String searchQuery, int offset, int limit, String sortColumn,
+	public ArrayList<KhachHang> searchByIdOrName(String searchQuery, int offset, int limit, String sortColumn,
 			String sortOrder) {
 		ArrayList<KhachHang> result = new ArrayList<>();
 		String query = "SELECT * FROM KhachHang WHERE maKH LIKE ? OR tenKH LIKE ?";

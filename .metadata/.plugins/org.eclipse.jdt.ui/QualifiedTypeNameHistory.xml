@@ -9,7 +9,6 @@
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="database.DatTourDAO"/>
     <fullyQualifiedTypeName name="model.ChiTietDatTour"/>
-    <fullyQualifiedTypeName name="model.Tour"/>
     <fullyQualifiedTypeName name="database.TourDAO"/>
     <fullyQualifiedTypeName name="model.DatTour"/>
     <fullyQualifiedTypeName name="model.DoiTac"/>
@@ -40,4 +39,5 @@
     <fullyQualifiedTypeName name="database.JDBCUtil"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
     <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
+    <fullyQualifiedTypeName name="model.Tour"/>
 </qualifiedTypeNameHistroy>

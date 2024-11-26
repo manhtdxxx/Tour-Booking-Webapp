@@ -33,7 +33,7 @@
 		<div class="flex-grow-1 px-3 vh-100 overflow-auto">
 
 			<!-- Intro -->
-			<div class="container-fluid text-center mb-3 pt-2">
+			<div class="container-fluid text-center mb-4 pt-2">
 				<h2 class="mb-1">Welcome to the Customer Management Dashboard</h2>
 				<h6 class="text-secondary">
 					Easily track and manage your customers, view active customer data, monitor
@@ -43,7 +43,7 @@
 
 			<!-- Quick Stats Section -->
 			<div
-				class="container-fluid mb-3 py-3 border-top border-bottom border-2 border-dark-subtle">
+				class="container-fluid mb-4 py-2 border-top border-bottom border-2 border-dark-subtle">
 				<div class="row">
 					<div class="col-sm-6 col-md-3">
 						<div class="card bg-light text-dark shadow-sm border-0">
@@ -91,11 +91,12 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Button Section -->
 			<%
 			String rawSearchQuery = request.getParameter("searchQuery");
 			String searchQuery = (rawSearchQuery == null || "null".equals(rawSearchQuery)) ? "" : rawSearchQuery.trim();
 			%>
-			<!-- Search Section -->
 			<div class="d-flex justify-content-between align-items-center mb-2">
 				<!-- Filter Button -->
 				<button class="btn btn-secondary">
@@ -103,11 +104,12 @@
 				</button>
 
 				<!-- Search Button -->
-				<form action="" method="get" class="d-flex">
-					<div class="input-group me-2"">
+				<form action="" method="get" class="d-flex" style="width: 40%;">
+					<div class="input-group me-2">
 						<span class="input-group-text"><i class="bi bi-search"></i></span> <input
-							class="form-control" type="text" placeholder="Enter ID or Name ..."
-							aria-label="Search" name="searchQuery" value="<%=searchQuery%>">
+							class="form-control" type="text"
+							placeholder="Nhập mã khách hàng, tên khách hàng, ..." aria-label="Search"
+							name="searchQuery" value="<%=searchQuery%>">
 					</div>
 					<button class="btn btn-primary text-nowrap" type="submit">Search</button>
 				</form>
@@ -116,19 +118,18 @@
 				<button class="btn btn-success disabled">
 					<i class="bi bi-plus-circle me-2"></i>Add
 				</button>
-
 			</div>
 
 			<!-- Display Message Section -->
 
-			<!-- message after toggling customer status -->
+			<!-- Message after toggling customer status -->
 			<%
 			String isStatusToggledParam = request.getParameter("isStatusUpdated");
 			if (isStatusToggledParam != null) {
 				boolean isStatusToggled = Boolean.parseBoolean(isStatusToggledParam);
 				if (isStatusToggled) {
 			%>
-			<div class="alert alert-success alert-dismissible fade show my-3 fs-6 mx-auto"
+			<div class="alert alert-success alert-dismissible fade show my-3 fs-6 mx-auto w-75"
 				role="alert">
 				<strong>Success!</strong> Status of customer <strong
 					class="text-dark text-decoration-underline"><%=request.getParameter("maKH")%></strong>
@@ -139,7 +140,7 @@
 			<%
 			} else {
 			%>
-			<div class="alert alert-danger alert-dismissible fade show my-3 fs-6 mx-auto"
+			<div class="alert alert-danger alert-dismissible fade show my-3 fs-6 mx-auto w-75"
 				role="alert">
 				<strong>Error!</strong> Failed to update the status <strong
 					class="text-dark text-uppercase"><%=request.getParameter("newStatus")%></strong> of
@@ -152,14 +153,14 @@
 			}
 			%>
 
-			<!-- message after deleting customer -->
+			<!-- Message after deleting customer -->
 			<%
 			String isDeletedParam = request.getParameter("isDeleted");
 			if (isDeletedParam != null) {
 				int isDeleted = Integer.parseInt(isDeletedParam);
 				if (isDeleted == 1) {
 			%>
-			<div class="alert alert-success alert-dismissible fade show my-3 fs-6 mx-auto"
+			<div class="alert alert-success alert-dismissible fade show my-3 fs-6 mx-auto w-50"
 				role="alert">
 				<strong>Success!</strong> Customer <strong class="text-dark text-decoration-underline"><%=request.getParameter("maKH")%></strong>
 				has been deleted successfully.
@@ -168,7 +169,7 @@
 			<%
 			} else {
 			%>
-			<div class="alert alert-danger alert-dismissible fade show my-3 fs-6 mx-auto"
+			<div class="alert alert-danger alert-dismissible fade show my-3 fs-6 mx-auto w-50"
 				role="alert">
 				<strong>Error!</strong> Failed to delete the customer <strong
 					class="text-dark text-decoration-underline"><%=request.getParameter("maKH")%></strong>.
@@ -195,7 +196,7 @@
 			int totalRecords;
 			int totalPages;
 			if (searchQuery != null && !searchQuery.isEmpty()) {
-				khachHangList = khDAO.searchIdOrName(searchQuery, offset, pageSize, sortColumn, sortDirection);
+				khachHangList = khDAO.searchByIdOrName(searchQuery, offset, pageSize, sortColumn, sortDirection);
 				totalRecords = khDAO.countSearchResults(searchQuery);
 			} else {
 				khachHangList = khDAO.selectPaginatedWithSortedData(offset, pageSize, sortColumn, sortDirection);
@@ -207,31 +208,31 @@
 				<table class="table table-bordered table-striped table-hover align-middle">
 					<thead class="table-dark">
 						<tr class="text-center">
-							<th>Mã khách hàng <a class="text-light text-decoration-none ms-2"
+							<th>Mã khách hàng<a class="text-light text-decoration-none ms-2"
 								href="?searchQuery=<%=searchQuery%>&sortColumn=maKH&sortDirection=<%=("asc".equalsIgnoreCase(sortDirection) && "maKH".equalsIgnoreCase(sortColumn)) ? "desc" : "asc"%>&page=<%=currentPage%>">
 									<%=("maKH".equalsIgnoreCase(sortColumn)) ? ("asc".equalsIgnoreCase(sortDirection) ? "▲" : "▼") : "↕"%>
 							</a>
 							</th>
 
-							<th>Tên khách hàng <a class="text-light text-decoration-none ms-2"
+							<th>Tên khách hàng<a class="text-light text-decoration-none ms-2"
 								href="?searchQuery=<%=searchQuery%>&sortColumn=tenKH&sortDirection=<%=("asc".equalsIgnoreCase(sortDirection) && "tenKH".equalsIgnoreCase(sortColumn)) ? "desc" : "asc"%>&page=<%=currentPage%>">
 									<%=("tenKH".equalsIgnoreCase(sortColumn)) ? ("asc".equalsIgnoreCase(sortDirection) ? "▲" : "▼") : "↕"%>
 							</a>
 							</th>
 
-							<th>Giới tính <a class="text-light text-decoration-none ms-2"
+							<th>Giới tính<a class="text-light text-decoration-none ms-2"
 								href="?searchQuery=<%=searchQuery%>&sortColumn=gioiTinh&sortDirection=<%=("asc".equalsIgnoreCase(sortDirection) && "gioiTinh".equalsIgnoreCase(sortColumn)) ? "desc" : "asc"%>&page=<%=currentPage%>">
 									<%=("gioiTinh".equalsIgnoreCase(sortColumn)) ? ("asc".equalsIgnoreCase(sortDirection) ? "▲" : "▼") : "↕"%>
 							</a>
 							</th>
 
-							<th>Ngày sinh <a class="text-light text-decoration-none ms-2"
+							<th>Ngày sinh<a class="text-light text-decoration-none ms-2"
 								href="?searchQuery=<%=searchQuery%>&sortColumn=ngaySinh&sortDirection=<%=("asc".equalsIgnoreCase(sortDirection) && "ngaySinh".equalsIgnoreCase(sortColumn)) ? "desc" : "asc"%>&page=<%=currentPage%>">
 									<%=("ngaySinh".equalsIgnoreCase(sortColumn)) ? ("asc".equalsIgnoreCase(sortDirection) ? "▲" : "▼") : "↕"%>
 							</a>
 							</th>
 
-							<th>Status <a class="text-light text-decoration-none ms-2"
+							<th>Status<a class="text-light text-decoration-none ms-2"
 								href="?searchQuery=<%=searchQuery%>&sortColumn=status&sortDirection=<%=("asc".equalsIgnoreCase(sortDirection) && "status".equalsIgnoreCase(sortColumn)) ? "desc" : "asc"%>&page=<%=currentPage%>">
 									<%=("status".equalsIgnoreCase(sortColumn)) ? ("asc".equalsIgnoreCase(sortDirection) ? "▲" : "▼") : "↕"%>
 							</a>
@@ -240,6 +241,7 @@
 							<th>Actions</th>
 						</tr>
 					</thead>
+
 					<tbody>
 						<%
 						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -266,6 +268,7 @@
 							<td><%=formattedDate%></td>
 							<td><%=status%></td>
 							<td style="width: 500px;">
+
 								<div class="btn-group gap-2">
 									<!-- View Details Button -->
 									<button class="btn btn-sm btn-info">
@@ -282,6 +285,13 @@
 										data-bs-target="#statusModal_<%=khachHang.getMaKH()%>">
 										<i class="bi bi-toggle-on me-1"></i>Toggle Status
 									</button>
+
+									<!-- Delete Button -->
+									<button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+										data-bs-target="#deleteModal_<%=khachHang.getMaKH()%>">
+										<i class="bi bi-trash3 me-1"></i>Delete
+									</button>
+
 									<!-- Modal for Toggling Status -->
 									<div class="modal fade" id="statusModal_<%=khachHang.getMaKH()%>"
 										data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -326,11 +336,6 @@
 										</div>
 									</div>
 
-									<!-- Delete Button -->
-									<button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-										data-bs-target="#deleteModal_<%=khachHang.getMaKH()%>">
-										<i class="bi bi-trash3 me-1"></i>Delete
-									</button>
 									<!-- Modal for Deleting Customer -->
 									<div class="modal fade" id="deleteModal_<%=khachHang.getMaKH()%>" tabindex="-1"
 										aria-labelledby="deleteModalLabel_<%=khachHang.getMaKH()%>" aria-hidden="true">
@@ -364,7 +369,9 @@
 											</div>
 										</div>
 									</div>
+
 								</div>
+
 							</td>
 						</tr>
 						<%
