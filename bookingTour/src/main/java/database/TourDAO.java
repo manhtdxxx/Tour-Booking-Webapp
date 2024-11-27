@@ -35,7 +35,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 				long giaVeHienTai = rs.getLong("giaVeHienTai");
 				long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
 				String moTa = rs.getString("moTa");
-				String filePath = rs.getString("filePath");
+				String fileName = rs.getString("fileName");
 
 				LoaiTour loaiTour = new LoaiTour();
 				loaiTour.setMaLoaiTour(maLoaiTour);
@@ -43,7 +43,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 
 				Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
 						thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa, soLuongVeHienCo,
-						moTa, filePath);
+						moTa, fileName);
 				result.add(tour);
 			}
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 					long giaVeHienTai = rs.getLong("giaVeHienTai");
 					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
 					String moTa = rs.getString("moTa");
-					String filePath = rs.getString("filePath");
+					String fileName = rs.getString("fileName");
 
 					LoaiTour loaiTour = new LoaiTour();
 					loaiTour.setMaLoaiTour(maLoaiTour);
@@ -83,7 +83,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 
 					result = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
 							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
-							soLuongVeHienCo, moTa, filePath);
+							soLuongVeHienCo, moTa, fileName);
 				}
 			}
 		} catch (Exception e) {
@@ -95,7 +95,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 	@Override
 	public int insert(Tour obj) {
 		int result = 0;
-		String sql = "INSERT INTO tour (maTour, maLoaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen, thoiGianXuatPhat, thoiGianKetThuc, soLuongVeToiDa, soLuongVeHienCo, giaVeHienTai, giaVeLucTruoc, moTa, filePath) "
+		String sql = "INSERT INTO tour (maTour, maLoaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen, thoiGianXuatPhat, thoiGianKetThuc, soLuongVeToiDa, soLuongVeHienCo, giaVeHienTai, giaVeLucTruoc, moTa, fileName) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
@@ -112,7 +112,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 			st.setLong(11, obj.getGiaVeHienTai());
 			st.setLong(12, obj.getGiaVeLucTruoc());
 			st.setString(13, obj.getMoTa());
-			st.setString(14, obj.getFilePath());
+			st.setString(14, obj.getFileName());
 
 			result = st.executeUpdate();
 		} catch (Exception e) {
@@ -124,7 +124,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 	@Override
 	public int insertAll(ArrayList<Tour> objs) {
 		int result = 0;
-		String sql = "INSERT INTO tour (maTour, maLoaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen, thoiGianXuatPhat, thoiGianKetThuc, soLuongVeToiDa, soLuongVeHienCo, giaVeHienTai, giaVeLucTruoc, moTa, filePath) "
+		String sql = "INSERT INTO tour (maTour, maLoaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen, thoiGianXuatPhat, thoiGianKetThuc, soLuongVeToiDa, soLuongVeHienCo, giaVeHienTai, giaVeLucTruoc, moTa, fileName) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
@@ -144,7 +144,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 				st.setLong(11, obj.getGiaVeHienTai());
 				st.setLong(12, obj.getGiaVeLucTruoc());
 				st.setString(13, obj.getMoTa());
-				st.setString(14, obj.getFilePath());
+				st.setString(14, obj.getFileName());
 
 				st.addBatch();
 			}
@@ -209,7 +209,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 		String sql = "UPDATE tour SET maLoaiTour = ?, tenTour = ?, diemXuatPhat = ?, diemKetThuc = ?, "
 				+ "phuongTienDiChuyen = ?, thoiGianXuatPhat = ?, thoiGianKetThuc = ?, "
 				+ "soLuongVeToiDa = ?, soLuongVeHienCo = ?, giaVeHienTai = ?, giaVeLucTruoc = ?, "
-				+ "moTa = ?, filePath = ? WHERE maTour = ?";
+				+ "moTa = ?, fileName = ? WHERE maTour = ?";
 
 		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
 
@@ -225,7 +225,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 			st.setLong(10, obj.getGiaVeHienTai());
 			st.setLong(11, obj.getGiaVeLucTruoc());
 			st.setString(12, obj.getMoTa());
-			st.setString(13, obj.getFilePath());
+			st.setString(13, obj.getFileName());
 			st.setString(14, obj.getMaTour());
 
 			result = st.executeUpdate();
@@ -330,7 +330,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 					long giaVeHienTai = rs.getLong("giaVeHienTai");
 					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
 					String moTa = rs.getString("moTa");
-					String filePath = rs.getString("filePath");
+					String fileName = rs.getString("fileName");
 					String tenLoaiTour = rs.getString("tenLoaiTour");
 
 					LoaiTour loaiTour = new LoaiTour();
@@ -339,7 +339,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 
 					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
 							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
-							soLuongVeHienCo, moTa, filePath);
+							soLuongVeHienCo, moTa, fileName);
 					result.add(tour);
 				}
 			}
@@ -387,7 +387,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 					long giaVeHienTai = rs.getLong("giaVeHienTai");
 					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
 					String moTa = rs.getString("moTa");
-					String filePath = rs.getString("filePath");
+					String fileName = rs.getString("fileName");
 					String tenLoaiTour = rs.getString("tenLoaiTour");
 
 					LoaiTour loaiTour = new LoaiTour();
@@ -396,7 +396,7 @@ public class TourDAO implements DAO_Interface<Tour> {
 
 					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
 							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
-							soLuongVeHienCo, moTa, filePath);
+							soLuongVeHienCo, moTa, fileName);
 					result.add(tour);
 				}
 			}
@@ -423,12 +423,12 @@ public class TourDAO implements DAO_Interface<Tour> {
 		return 0;
 	}
 
-	public int updateFilePath(Tour obj) {
+	public int updateFileName(Tour obj) {
 		int result = 0;
-		String sql = "UPDATE tour SET filePath = ? WHERE maTour = ?";
+		String sql = "UPDATE tour SET fileName = ? WHERE maTour = ?";
 
 		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
-			st.setString(1, obj.getFilePath());
+			st.setString(1, obj.getFileName());
 			st.setString(2, obj.getMaTour());
 
 			result = st.executeUpdate();
@@ -438,4 +438,20 @@ public class TourDAO implements DAO_Interface<Tour> {
 		return result;
 	}
 
+	public boolean tourExists(String tenTour, String fileName) {
+		String query = "SELECT COUNT(*) FROM tour WHERE tenTour = ? OR fileName = ?";
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(query)) {
+			st.setString(1, tenTour);
+			st.setString(2, fileName);
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1) > 0;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

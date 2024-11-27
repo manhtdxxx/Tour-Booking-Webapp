@@ -115,9 +115,9 @@
 				</form>
 
 				<!-- Add Button -->
-				<button class="btn btn-success disabled">
-					<i class="bi bi-plus-circle me-2"></i>Add
-				</button>
+				<a href="<%=baseURL%>/adminView/addProduct.jsp" class="btn btn-success"> <i
+					class="bi bi-plus-circle me-2"></i>Add
+				</a>
 			</div>
 
 			<!-- Message after deleting tour -->

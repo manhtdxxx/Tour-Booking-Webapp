@@ -4,12 +4,9 @@
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="ClassName"/>
     <fullyQualifiedTypeName name="java.lang.LayerInstantiationException"/>
-    <fullyQualifiedTypeName name="model.LoaiTour"/>
-    <fullyQualifiedTypeName name="database.LoaiTourDAO"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="database.DatTourDAO"/>
     <fullyQualifiedTypeName name="model.ChiTietDatTour"/>
-    <fullyQualifiedTypeName name="database.TourDAO"/>
     <fullyQualifiedTypeName name="model.DatTour"/>
     <fullyQualifiedTypeName name="model.DoiTac"/>
     <fullyQualifiedTypeName name="database.DoiTacDAO"/>
@@ -36,8 +33,12 @@
     <fullyQualifiedTypeName name="database.DAO_Interface"/>
     <fullyQualifiedTypeName name="database.NhanVienDAO"/>
     <fullyQualifiedTypeName name="model.NhanVien"/>
-    <fullyQualifiedTypeName name="database.JDBCUtil"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
     <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
+    <fullyQualifiedTypeName name="model.LoaiTour"/>
+    <fullyQualifiedTypeName name="database.LoaiTourDAO"/>
+    <fullyQualifiedTypeName name="database.TourDAO"/>
     <fullyQualifiedTypeName name="model.Tour"/>
+    <fullyQualifiedTypeName name="database.JDBCUtil"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
 </qualifiedTypeNameHistroy>

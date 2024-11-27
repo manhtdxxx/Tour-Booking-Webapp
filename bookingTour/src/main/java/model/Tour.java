@@ -17,7 +17,7 @@ public class Tour {
 	private int soLuongVeToiDa;
 	private int soLuongVeHienCo;
 	private String moTa;
-	private String filePath;
+	private String fileName;
 
 	// Default constructor
 	public Tour() {
@@ -26,7 +26,7 @@ public class Tour {
 	// Constructor with all fields
 	public Tour(String maTour, LoaiTour loaiTour, String tenTour, String diemXuatPhat, String diemKetThuc,
 			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, long giaVeHienTai,
-			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa, String filePath) {
+			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa, String fileName) {
 		this.maTour = maTour;
 		this.loaiTour = loaiTour;
 		this.tenTour = tenTour;
@@ -40,7 +40,7 @@ public class Tour {
 		this.soLuongVeToiDa = soLuongVeToiDa;
 		this.soLuongVeHienCo = soLuongVeHienCo;
 		this.moTa = moTa;
-		this.filePath = filePath;
+		this.fileName = fileName;
 	}
 
 	// not including filePath
@@ -167,12 +167,12 @@ public class Tour {
 		this.moTa = moTa;
 	}
 
-	public String getFilePath() {
-		return filePath;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	// Equals and hashCode based on primary key

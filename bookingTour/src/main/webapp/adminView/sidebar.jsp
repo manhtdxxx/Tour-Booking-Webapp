@@ -21,7 +21,7 @@ String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + r
 			class="nav-link text-white <%=request.getRequestURI().contains("manageOrder.jsp") ? "active" : ""%>">📋
 				Orders</a></li>
 		<li><a href="<%=baseURL%>/adminView/manageProduct.jsp"
-			class="nav-link text-white <%=request.getRequestURI().contains("manageProduct.jsp") ? "active" : ""%>">📦
+			class="nav-link text-white <%=request.getRequestURI().contains("Product.jsp") ? "active" : ""%>">📦
 				Products</a></li>
 		<li><a href="<%=baseURL%>/adminView/manageCustomer.jsp"
 			class="nav-link text-white <%=request.getRequestURI().contains("manageCustomer.jsp") ? "active" : ""%>">👥
