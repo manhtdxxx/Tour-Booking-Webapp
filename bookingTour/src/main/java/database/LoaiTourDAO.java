@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import model.LoaiTour;
 
-public class LoaiTourDAO implements DAO_Interface<LoaiTour> {
+public class LoaiTourDAO implements DAOInterface<LoaiTour> {
 
 	@Override
 	public ArrayList<LoaiTour> selectAll() {

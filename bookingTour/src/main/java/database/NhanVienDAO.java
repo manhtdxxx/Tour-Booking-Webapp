@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import model.NhanVien;
 
-public class NhanVienDAO implements DAO_Interface<NhanVien> {
+public class NhanVienDAO implements DAOInterface<NhanVien> {
 
 	@Override
 	public ArrayList<NhanVien> selectAll() {

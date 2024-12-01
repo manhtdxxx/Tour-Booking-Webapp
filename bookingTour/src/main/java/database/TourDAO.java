@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import model.LoaiTour;
 import model.Tour;
 
-public class TourDAO implements DAO_Interface<Tour> {
+public class TourDAO implements DAOInterface<Tour> {
 
 	@Override
 	public ArrayList<Tour> selectAll() {
@@ -454,4 +454,555 @@ public class TourDAO implements DAO_Interface<Tour> {
 		}
 		return false;
 	}
+
+	public ArrayList<Tour> selectAllTours(String maLoaiTour, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT * FROM tour WHERE soLuongVeHienCo != 0";
+
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+		sql += " LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, limit);
+			st.setInt(parameterIndex, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					LoaiTour loaiTour = null;
+					if (maLoaiTour != null) {
+						loaiTour = new LoaiTour();
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int countAllTours(String maLoaiTour) {
+		String sql = "SELECT COUNT(*) FROM tour WHERE soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			if (maLoaiTour != null) {
+				st.setString(1, maLoaiTour);
+			}
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public ArrayList<Tour> selectShortTours(String maLoaiTour, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT * FROM tour WHERE DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) BETWEEN 1 AND 3 AND soLuongVeHienCo != 0";
+
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+		sql += " ORDER BY DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) ASC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, limit);
+			st.setInt(parameterIndex, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					LoaiTour loaiTour = new LoaiTour();
+					if (maLoaiTour != null) {
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<Tour> selectExtendedTours(String maLoaiTour, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT * FROM tour WHERE DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) >= 4 AND soLuongVeHienCo != 0";
+
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+		sql += " ORDER BY DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) ASC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, limit);
+			st.setInt(parameterIndex, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					LoaiTour loaiTour = new LoaiTour();
+					if (maLoaiTour != null) {
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int countShortTours(String maLoaiTour) {
+		String sql = "SELECT COUNT(*) FROM tour WHERE DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) BETWEEN 1 AND 3 AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			if (maLoaiTour != null) {
+				st.setString(1, maLoaiTour);
+			}
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int countExtendedTours(String maLoaiTour) {
+		String sql = "SELECT COUNT(*) FROM tour WHERE DATEDIFF(thoiGianKetThuc, thoiGianXuatPhat) >= 4 AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			if (maLoaiTour != null) {
+				st.setString(1, maLoaiTour);
+			}
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public ArrayList<Tour> selectHotTours(String maLoaiTour, int minSoLuongVeDat, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT t.*, SUM(ctdt.soLuongVeDat) AS totalSoLuongVeDat "
+				+ "FROM tour t JOIN chitietdattour ctdt ON t.maTour = ctdt.maTour " + "WHERE t.soLuongVeHienCo != 0";
+
+		if (maLoaiTour != null) {
+			sql += " AND t.maLoaiTour = ?";
+		}
+
+		sql += " GROUP BY t.maTour HAVING SUM(ctdt.soLuongVeDat) >= ? "
+				+ "ORDER BY totalSoLuongVeDat DESC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, minSoLuongVeDat);
+			st.setInt(parameterIndex++, limit);
+			st.setInt(parameterIndex, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					int totalSoLuongVeDat = rs.getInt("totalSoLuongVeDat");
+
+					LoaiTour loaiTour = null;
+					if (maLoaiTour != null) {
+						loaiTour = new LoaiTour();
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName, totalSoLuongVeDat);
+					result.add(tour);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int countHotTours(String maLoaiTour, int minSoLuongVeDat) {
+		String sql = "SELECT COUNT(DISTINCT t.maTour) "
+				+ "FROM tour t JOIN chitietdattour ctdt ON t.maTour = ctdt.maTour " + "WHERE t.soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND t.maLoaiTour = ?";
+		}
+		sql += " GROUP BY t.maTour HAVING SUM(ctdt.soLuongVeDat) >= ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, minSoLuongVeDat);
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public ArrayList<Tour> selectCheapTours(String maLoaiTour, long maxPrice, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT * FROM tour WHERE giaVeHienTai <= ? AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+		sql += " ORDER BY giaVeHienTai ASC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setLong(1, maxPrice);
+			int index = 2;
+			if (maLoaiTour != null) {
+				st.setString(index++, maLoaiTour);
+			}
+			st.setInt(index++, limit);
+			st.setInt(index, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					LoaiTour loaiTour = new LoaiTour();
+					if (maLoaiTour != null) {
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public ArrayList<Tour> selectPremiumTours(String maLoaiTour, long minPrice, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT * FROM tour WHERE giaVeHienTai >= ? AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+		sql += " ORDER BY giaVeHienTai DESC, soLuongVeHienCo ASC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setLong(1, minPrice);
+			int index = 2;
+			if (maLoaiTour != null) {
+				st.setString(index++, maLoaiTour);
+			}
+			st.setInt(index++, limit);
+			st.setInt(index, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					LoaiTour loaiTour = new LoaiTour();
+					if (maLoaiTour != null) {
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public int countPremiumTours(String maLoaiTour, long minPrice) {
+		String sql = "SELECT COUNT(*) FROM tour WHERE giaVeHienTai >= ? AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setLong(1, minPrice);
+			int index = 2;
+			if (maLoaiTour != null) {
+				st.setString(index++, maLoaiTour);
+			}
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int countCheapTours(String maLoaiTour, long maxPrice) {
+		String sql = "SELECT COUNT(*) FROM tour WHERE giaVeHienTai <= ? AND soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setLong(1, maxPrice);
+			int index = 2;
+			if (maLoaiTour != null) {
+				st.setString(index++, maLoaiTour);
+			}
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public ArrayList<Tour> selectDiscountedTours(String maLoaiTour, int limit, int offset) {
+		ArrayList<Tour> result = new ArrayList<>();
+		String sql = "SELECT t.*, "
+				+ "( (t.giaVeLucTruoc - t.giaVeHienTai) / t.giaVeLucTruoc ) * 100 AS discountPercentage "
+				+ "FROM tour t " + "WHERE t.giaVeLucTruoc > t.giaVeHienTai AND t.soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND t.maLoaiTour = ?";
+		}
+		sql += " ORDER BY discountPercentage DESC LIMIT ? OFFSET ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+			st.setInt(parameterIndex++, limit);
+			st.setInt(parameterIndex++, offset);
+
+			try (ResultSet rs = st.executeQuery()) {
+				while (rs.next()) {
+					String maTour = rs.getString("maTour");
+					String tenTour = rs.getString("tenTour");
+					String diemXuatPhat = rs.getString("diemXuatPhat");
+					String diemKetThuc = rs.getString("diemKetThuc");
+					String phuongTienDiChuyen = rs.getString("phuongTienDiChuyen");
+					Timestamp thoiGianXuatPhat = rs.getTimestamp("thoiGianXuatPhat");
+					Timestamp thoiGianKetThuc = rs.getTimestamp("thoiGianKetThuc");
+					int soLuongVeToiDa = rs.getInt("soLuongVeToiDa");
+					int soLuongVeHienCo = rs.getInt("soLuongVeHienCo");
+					long giaVeHienTai = rs.getLong("giaVeHienTai");
+					long giaVeLucTruoc = rs.getLong("giaVeLucTruoc");
+					String moTa = rs.getString("moTa");
+					String fileName = rs.getString("fileName");
+
+					double discountPercentage = rs.getDouble("discountPercentage");
+
+					LoaiTour loaiTour = null;
+					if (maLoaiTour != null) {
+						loaiTour = new LoaiTour();
+						loaiTour.setMaLoaiTour(maLoaiTour);
+						loaiTour = new LoaiTourDAO().selectById(loaiTour);
+					}
+
+					Tour tour = new Tour(maTour, loaiTour, tenTour, diemXuatPhat, diemKetThuc, phuongTienDiChuyen,
+							thoiGianXuatPhat, thoiGianKetThuc, giaVeHienTai, giaVeLucTruoc, soLuongVeToiDa,
+							soLuongVeHienCo, moTa, fileName, discountPercentage);
+					result.add(tour);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public int countDiscountedTours(String maLoaiTour) {
+		String sql = "SELECT COUNT(*) FROM tour t "
+				+ "WHERE t.giaVeLucTruoc > t.giaVeHienTai AND t.soLuongVeHienCo != 0";
+		if (maLoaiTour != null) {
+			sql += " AND t.maLoaiTour = ?";
+		}
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+			int parameterIndex = 1;
+			if (maLoaiTour != null) {
+				st.setString(parameterIndex++, maLoaiTour);
+			}
+
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int updateSoLuongVeHienCo(String maTour, int soLuongVeHienCo) {
+		String sql = "UPDATE tour SET soLuongVeHienCo = ? WHERE maTour = ?";
+		int rowsUpdated = 0;
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+
+			st.setInt(1, soLuongVeHienCo);
+			st.setString(2, maTour);
+
+			rowsUpdated = st.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return rowsUpdated; // Returns the number of rows affected
+	}
+
 }

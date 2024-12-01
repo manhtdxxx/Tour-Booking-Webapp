@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import model.KhachHang;
 
-public class KhachHangDAO implements DAO_Interface<KhachHang> {
+public class KhachHangDAO implements DAOInterface<KhachHang> {
 
 	@Override
 	public ArrayList<KhachHang> selectAll() {

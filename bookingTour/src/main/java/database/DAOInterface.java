@@ -2,7 +2,7 @@ package database;
 
 import java.util.ArrayList;
 
-public interface DAO_Interface<ClassName> {
+public interface DAOInterface<ClassName> {
 
 	public ArrayList<ClassName> selectAll();
 

@@ -6,20 +6,20 @@ public class ChiTietDatTour {
 	private String maChiTietDatTour;
 	private Tour tour;
 	private DatTour datTour;
-	private int giaVeLucBooking;
-	private int soLuongVe;
-	private int tongTien;
+	private long giaVeLucBooking;
+	private int soLuongVeDat;
+	private long tongTien;
 
 	public ChiTietDatTour() {
 	}
 
-	public ChiTietDatTour(String maChiTietDatTour, Tour tour, DatTour datTour, int giaVeLucBooking, int soLuongVe,
-			int tongTien) {
+	public ChiTietDatTour(String maChiTietDatTour, Tour tour, DatTour datTour, long giaVeLucBooking, int soLuongVeDat,
+			long tongTien) {
 		this.maChiTietDatTour = maChiTietDatTour;
 		this.tour = tour;
 		this.datTour = datTour;
 		this.giaVeLucBooking = giaVeLucBooking;
-		this.soLuongVe = soLuongVe;
+		this.soLuongVeDat = soLuongVeDat;
 		this.tongTien = tongTien;
 	}
 
@@ -47,27 +47,27 @@ public class ChiTietDatTour {
 		this.datTour = datTour;
 	}
 
-	public int getGiaVeLucBooking() {
+	public long getGiaVeLucBooking() {
 		return giaVeLucBooking;
 	}
 
-	public void setGiaVeLucBooking(int giaVeLucBooking) {
+	public void setGiaVeLucBooking(long giaVeLucBooking) {
 		this.giaVeLucBooking = giaVeLucBooking;
 	}
 
-	public int getSoLuongVe() {
-		return soLuongVe;
+	public int getSoLuongVeDat() {
+		return soLuongVeDat;
 	}
 
-	public void setSoLuongVe(int soLuongVe) {
-		this.soLuongVe = soLuongVe;
+	public void setSoLuongVeDat(int soLuongVe) {
+		this.soLuongVeDat = soLuongVe;
 	}
 
-	public int getTongTien() {
+	public long getTongTien() {
 		return tongTien;
 	}
 
-	public void setTongTien(int tongTien) {
+	public void setTongTien(long tongTien) {
 		this.tongTien = tongTien;
 	}
 
@@ -91,7 +91,8 @@ public class ChiTietDatTour {
 	@Override
 	public String toString() {
 		return "ChiTietDatTour [maChiTietDatTour=" + maChiTietDatTour + ", tour=" + tour + ", datTour=" + datTour
-				+ ", giaVeLucBooking=" + giaVeLucBooking + ", soLuongVe=" + soLuongVe + ", tongTien=" + tongTien + "]";
+				+ ", giaVeLucBooking=" + giaVeLucBooking + ", soLuongVeDat=" + soLuongVeDat + ", tongTien=" + tongTien
+				+ "]";
 	}
 
 }

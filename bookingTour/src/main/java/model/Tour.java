@@ -19,6 +19,11 @@ public class Tour {
 	private String moTa;
 	private String fileName;
 
+	// to caculate discount from giaVeHienTai and giaVeLucTruoc
+	private double discountPercentage;
+	// when use join with table chitietdattour
+	private int soLuongVeDat;
+
 	// Default constructor
 	public Tour() {
 	}
@@ -60,6 +65,48 @@ public class Tour {
 		this.soLuongVeToiDa = soLuongVeToiDa;
 		this.soLuongVeHienCo = soLuongVeHienCo;
 		this.moTa = moTa;
+	}
+
+	public Tour(String maTour, LoaiTour loaiTour, String tenTour, String diemXuatPhat, String diemKetThuc,
+			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, long giaVeHienTai,
+			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa, String fileName,
+			int soLuongVeDat) {
+		this.maTour = maTour;
+		this.loaiTour = loaiTour;
+		this.tenTour = tenTour;
+		this.diemXuatPhat = diemXuatPhat;
+		this.diemKetThuc = diemKetThuc;
+		this.phuongTienDiChuyen = phuongTienDiChuyen;
+		this.thoiGianXuatPhat = thoiGianXuatPhat;
+		this.thoiGianKetThuc = thoiGianKetThuc;
+		this.giaVeHienTai = giaVeHienTai;
+		this.giaVeLucTruoc = giaVeLucTruoc;
+		this.soLuongVeToiDa = soLuongVeToiDa;
+		this.soLuongVeHienCo = soLuongVeHienCo;
+		this.moTa = moTa;
+		this.fileName = fileName;
+		this.soLuongVeDat = soLuongVeDat;
+	}
+
+	public Tour(String maTour, LoaiTour loaiTour, String tenTour, String diemXuatPhat, String diemKetThuc,
+			String phuongTienDiChuyen, Timestamp thoiGianXuatPhat, Timestamp thoiGianKetThuc, long giaVeHienTai,
+			long giaVeLucTruoc, int soLuongVeToiDa, int soLuongVeHienCo, String moTa, String fileName,
+			double discountPercentage) {
+		this.maTour = maTour;
+		this.loaiTour = loaiTour;
+		this.tenTour = tenTour;
+		this.diemXuatPhat = diemXuatPhat;
+		this.diemKetThuc = diemKetThuc;
+		this.phuongTienDiChuyen = phuongTienDiChuyen;
+		this.thoiGianXuatPhat = thoiGianXuatPhat;
+		this.thoiGianKetThuc = thoiGianKetThuc;
+		this.giaVeHienTai = giaVeHienTai;
+		this.giaVeLucTruoc = giaVeLucTruoc;
+		this.soLuongVeToiDa = soLuongVeToiDa;
+		this.soLuongVeHienCo = soLuongVeHienCo;
+		this.moTa = moTa;
+		this.fileName = fileName;
+		this.discountPercentage = discountPercentage;
 	}
 
 	// Getter and Setter methods
@@ -175,7 +222,22 @@ public class Tour {
 		this.fileName = fileName;
 	}
 
-	// Equals and hashCode based on primary key
+	public int getSoLuongVeDat() {
+		return soLuongVeDat;
+	}
+
+	public void setSoLuongVeDat(int soLuongVeDaDat) {
+		this.soLuongVeDat = soLuongVeDaDat;
+	}
+
+	public double getDiscountPercentage() {
+		return discountPercentage;
+	}
+
+	public void setDiscountPercentage(double discountPercentage) {
+		this.discountPercentage = discountPercentage;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(maTour);

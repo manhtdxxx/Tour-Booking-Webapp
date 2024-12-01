@@ -153,7 +153,7 @@
 			String pageParam = request.getParameter("page");
 			int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
 
-			int pageSize = 5;
+			int pageSize = 6;
 			int offset = (currentPage - 1) * pageSize;
 
 			String sortColumn = request.getParameter("sortColumn") != null ? request.getParameter("sortColumn") : "maTour";

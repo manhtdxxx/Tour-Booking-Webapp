@@ -7,23 +7,21 @@ public class DatTour {
 	private String maDatTour;
 	private KhachHang khachHang;
 	private Timestamp thoiGianDatTour;
-	private String trangThaiThanhToan;
-	private Timestamp thoiGianThanhToan;
 	private String hinhThucThanhToan;
 	private String ghiChu;
+	private String trangThaiDatTour;
 
 	public DatTour() {
 	}
 
-	public DatTour(String maDatTour, KhachHang khachHang, Timestamp thoiGianDatTour, String trangThaiThanhToan,
-			Timestamp thoiGianThanhToan, String hinhThucThanhToan, String ghiChu) {
+	public DatTour(String maDatTour, KhachHang khachHang, Timestamp thoiGianDatTour, String hinhThucThanhToan,
+			String ghiChu, String trangThaiDatTour) {
 		this.maDatTour = maDatTour;
 		this.khachHang = khachHang;
 		this.thoiGianDatTour = thoiGianDatTour;
-		this.trangThaiThanhToan = trangThaiThanhToan;
-		this.thoiGianThanhToan = thoiGianThanhToan;
 		this.hinhThucThanhToan = hinhThucThanhToan;
 		this.ghiChu = ghiChu;
+		this.trangThaiDatTour = trangThaiDatTour;
 	}
 
 	public String getMaDatTour() {
@@ -50,22 +48,6 @@ public class DatTour {
 		this.thoiGianDatTour = thoiGianDatTour;
 	}
 
-	public String getTrangThaiThanhToan() {
-		return trangThaiThanhToan;
-	}
-
-	public void setTrangThaiThanhToan(String trangThaiThanhToan) {
-		this.trangThaiThanhToan = trangThaiThanhToan;
-	}
-
-	public Timestamp getThoiGianThanhToan() {
-		return thoiGianThanhToan;
-	}
-
-	public void setThoiGianThanhToan(Timestamp thoiGianThanhToan) {
-		this.thoiGianThanhToan = thoiGianThanhToan;
-	}
-
 	public String getHinhThucThanhToan() {
 		return hinhThucThanhToan;
 	}
@@ -80,6 +62,14 @@ public class DatTour {
 
 	public void setGhiChu(String ghiChu) {
 		this.ghiChu = ghiChu;
+	}
+
+	public String getTrangThaiDatTour() {
+		return trangThaiDatTour;
+	}
+
+	public void setTrangThaiDatTour(String trangThaiDatTour) {
+		this.trangThaiDatTour = trangThaiDatTour;
 	}
 
 	@Override
@@ -98,12 +88,4 @@ public class DatTour {
 		DatTour other = (DatTour) obj;
 		return Objects.equals(maDatTour, other.maDatTour);
 	}
-
-	@Override
-	public String toString() {
-		return "DatTour [maDatTour=" + maDatTour + ", khachHang=" + khachHang + ", thoiGianDatTour=" + thoiGianDatTour
-				+ ", trangThaiThanhToan=" + trangThaiThanhToan + ", thoiGianThanhToan=" + thoiGianThanhToan
-				+ ", hinhThucThanhToan=" + hinhThucThanhToan + ", ghiChu=" + ghiChu + "]";
-	}
-
 }

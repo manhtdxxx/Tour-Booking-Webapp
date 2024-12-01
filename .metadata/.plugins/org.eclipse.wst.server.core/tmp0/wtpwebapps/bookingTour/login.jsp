@@ -147,6 +147,8 @@ p.mt-3 {
 			%>
 
 			<form action="do-login" method="post">
+				<input type="hidden" name="redirect"
+					value="<%=request.getParameter("redirect") != null ? request.getParameter("redirect") : ""%>">
 				<div class="mb-3">
 					<label for="username" class="form-label">Username:</label> <input type="text"
 						class="form-control" id="username" placeholder="Enter username" name="username"
@@ -160,8 +162,8 @@ p.mt-3 {
 				<div class="d-flex align-items-center justify-content-between mb-3">
 					<div class="form-check">
 						<input class="form-check-input" type="checkbox" name="remember" id="remember"
-							<%=(!savedUsername.isEmpty() ? "checked" : "")%>> <label class="form-check-label"
-							for="remember">Ghi nhớ đăng nhập</label>
+							<%=(!savedUsername.isEmpty() ? "checked" : "")%>> <label
+							class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
 					</div>
 					<a href="#">Quên mật khẩu?</a>
 				</div>
