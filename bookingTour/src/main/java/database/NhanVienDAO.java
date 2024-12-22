@@ -123,4 +123,25 @@ public class NhanVienDAO implements DAOInterface<NhanVien> {
 		}
 		return result;
 	}
+
+	public NhanVien selectByUsernameAndPassword(String username, String password) {
+		NhanVien nv = null;
+		String sql = "SELECT * FROM nhanvien WHERE username = ? AND password = ?";
+
+		try (Connection conn = JDBCUtil.getConnection(); PreparedStatement st = conn.prepareStatement(sql)) {
+
+			st.setString(1, username);
+			st.setString(2, password);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				String maNV = rs.getString("maNV");
+				nv = new NhanVien(maNV, username, password);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nv;
+	}
+
 }

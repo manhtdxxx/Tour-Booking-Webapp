@@ -24,8 +24,6 @@
     <fullyQualifiedTypeName name="java.awt.MediaTracker"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="database.DAO_Interface"/>
-    <fullyQualifiedTypeName name="database.NhanVienDAO"/>
-    <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="java.net.URLEncoder"/>
     <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
     <fullyQualifiedTypeName name="model.LoaiTour"/>
@@ -43,4 +41,6 @@
     <fullyQualifiedTypeName name="model.KhachHang"/>
     <fullyQualifiedTypeName name="model.Tour"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="database.NhanVienDAO"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
 </qualifiedTypeNameHistroy>

@@ -1,3 +1,0 @@
-127.0.0.1 - - [31/Oct/2024:23:11:32 +0700] "GET / HTTP/1.1" 404 751
-0:0:0:0:0:0:0:1 - - [31/Oct/2024:23:11:33 +0700] "GET /bookingTour/WEB-INF/classes/database/KhachHangDAO.java HTTP/1.1" 404 682
-0:0:0:0:0:0:0:1 - - [31/Oct/2024:23:11:33 +0700] "GET /favicon.ico HTTP/1.1" 404 762

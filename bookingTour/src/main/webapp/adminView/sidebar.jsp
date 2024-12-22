@@ -14,17 +14,17 @@ String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + r
 	<hr>
 	<ul class="nav nav-pills flex-column mb-auto">
 		<li class="nav-item"><a href="<%=baseURL%>/adminView/adminHome.jsp"
-			class="nav-link text-white <%=request.getRequestURI().contains("adminHome.jsp") ? "active" : ""%>"
+			class="nav-link text-white <%=request.getRequestURI().contains("Home.jsp") ? "active" : ""%>"
 			aria-current="page">🏠 Home</a></li>
 		<li><a href="#" class="nav-link text-white">📊 Dashboard</a></li>
 		<li><a href="<%=baseURL%>/adminView/manageOrder.jsp"
-			class="nav-link text-white <%=request.getRequestURI().contains("manageOrder.jsp") ? "active" : ""%>">📋
+			class="nav-link text-white <%=request.getRequestURI().contains("Order.jsp") ? "active" : ""%>">📋
 				Orders</a></li>
 		<li><a href="<%=baseURL%>/adminView/manageProduct.jsp"
 			class="nav-link text-white <%=request.getRequestURI().contains("Product.jsp") ? "active" : ""%>">📦
 				Products</a></li>
 		<li><a href="<%=baseURL%>/adminView/manageCustomer.jsp"
-			class="nav-link text-white <%=request.getRequestURI().contains("manageCustomer.jsp") ? "active" : ""%>">👥
+			class="nav-link text-white <%=request.getRequestURI().contains("Customer.jsp") ? "active" : ""%>">👥
 				Customers</a></li>
 	</ul>
 	<hr>
@@ -39,7 +39,7 @@ String baseURL = request.getScheme() + "://" + request.getServerName() + ":" + r
 			<li><a class="dropdown-item" href="#">Settings</a></li>
 			<li><a class="dropdown-item" href="#">Profile</a></li>
 			<li><hr class="dropdown-divider"></li>
-			<li><a class="dropdown-item" href="#">Sign out</a></li>
+			<li><a class="dropdown-item" href="<%=baseURL%>/do-logout">Sign out</a></li>
 		</ul>
 	</div>
 </div>
