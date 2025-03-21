@@ -1,3 +1,3 @@
-Tech Stack: MySQL, HTML, CSS, Bootstrap, Java, JSP/Servlet
+Tech Stack: MySQL, HTML, CSS, Bootstrap, Javascript, Java, JSP/Servlet
 
-Tools: Eclipse, Xampp (MySQL, Apache Tomcat)
+Tools: Eclipse, MySQL Workbench, Apache Tomcat
